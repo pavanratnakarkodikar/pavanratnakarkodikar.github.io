@@ -722,7 +722,7 @@ body::before {
   .pd-meta--tl, .pd-scroll { display: none; }
   .pd-credit {
     top: clamp(20px, 2.4vw, 36px); left: var(--gutter); right: var(--gutter); width: auto;
-    display: grid; grid-template-columns: auto minmax(0, 46ch); justify-content: space-between; align-items: end; gap: 32px;
+    display: grid; grid-template-columns: auto minmax(0, 64ch); justify-content: space-between; align-items: end; gap: 32px;
   }
   .pd-credit-name { font-size: clamp(30px, 2.8vw, 48px); }
   .pd-credit-line { margin: 0; text-align: right; font-size: clamp(15px, 1.2vw, 19px); }

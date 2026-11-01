@@ -76,18 +76,28 @@
     const hero = document.querySelector(".hero-d"), frame = document.querySelector(".pd-frame");
     if (!hero || !frame || !hero.offsetParent) return;
     const phone = innerWidth < 760;
-    // KODIKAR is fitted to the width, then stretched up (from its baseline) to meet the name strip
-    const word = hero.querySelector(".pd-name .fit"), credit = hero.querySelector(".pd-credit");
+    // KODIKAR is fitted to the width, then stretched up (from its baseline) to meet the name strip.
+    // Everything is measured from layout boxes (offsetTop/Left), which transforms and the entrance
+    // animation don't affect, so the result is the same whenever this runs.
+    const word = hero.querySelector(".pd-name .fit"), credit = hero.querySelector(".pd-credit"), name = hero.querySelector(".pd-name");
     word.style.transform = "";
-    const hr = hero.getBoundingClientRect(), wr = word.getBoundingClientRect();
-    const top = credit.getBoundingClientRect().bottom - hr.top + (phone ? 22 : 30);
-    const wordTop = wr.top - hr.top, wordBottom = wr.bottom - hr.top;
-    word.style.transform = `scaleY(${Math.max(1, (wordBottom - top) / (wordBottom - wordTop)).toFixed(3)})`;
-    // the portrait takes the O's place at the stretched size
-    const o = hero.querySelectorAll(".pd-l")[+(hero.querySelector(".pd-name").dataset.swap || 0)].getBoundingClientRect();
-    const p = o.width * (phone ? 0.12 : 0.06);
-    const l = o.left - hr.left - p, w = o.width + p * 2, h = o.height;
-    frame.style.top = o.top - hr.top + "px";
+    const top = credit.offsetTop + credit.offsetHeight + (phone ? 22 : 30);
+    const wordBox = () => ({ t: name.offsetTop + word.offsetTop, h: word.offsetHeight });
+    let wb = wordBox();
+    // short windows: the width-fitted word is already taller than the space under the strip, so shrink it to fit
+    if (wb.t + wb.h - top < wb.h) {
+      word.style.fontSize = parseFloat(word.style.fontSize) * ((wb.t + wb.h - top) / wb.h) * 0.99 + "px";
+      wb = wordBox();
+    }
+    const bottom = wb.t + wb.h, s = Math.max(1, (bottom - top) / wb.h);
+    word.style.transform = `scaleY(${s.toFixed(3)})`;
+    // the portrait takes the O's place at the stretched size (scaleY from the bottom edge)
+    const oEl = hero.querySelectorAll(".pd-l")[+(name.dataset.swap || 0)];
+    const oLeft = name.offsetLeft + word.offsetLeft + oEl.offsetLeft, oW = oEl.offsetWidth;
+    const oTop = bottom - (bottom - (wb.t + oEl.offsetTop)) * s, oH = oEl.offsetHeight * s;
+    const p = oW * (phone ? 0.12 : 0.06);
+    const l = oLeft - p, w = oW + p * 2, h = oH;
+    frame.style.top = oTop + "px";
     frame.style.height = h + "px";
     const fw = Math.max(w, Math.min(h * 0.8, hero.clientWidth - 32));
     const fl = Math.min(Math.max(l + w / 2 - fw / 2, 16), hero.clientWidth - 16 - fw);
