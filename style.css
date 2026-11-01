@@ -799,6 +799,5 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; } /* Lenis d
 
 /* showreel: no black-and-white filter (the halftone dots and red grid stay) */
 .hero-film .duo-media { filter: none; }
-/* the new showreel render matches the 1522x1080 frame; its last ~5px column is black in the file,
-   so the clip runs 0.6% wider than the frame and the frame's edge trims that strip off */
-.hero-film .duo-media { transform: none; width: 100.6%; max-width: none; right: auto; }
+/* the showreel render is exactly 1522x1080, the frame's shape: no zoom or trim needed */
+.hero-film .duo-media { transform: none; }
