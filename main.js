@@ -65,38 +65,78 @@
   // Poster hero: the portrait frame replaces one letter of the name (RE·MA style)
   const pdWord = document.querySelector(".pd-name .fit");
   if (pdWord) pdWord.innerHTML = [...pdWord.textContent].map((c) => `<span class="pd-l">${c}</span>`).join("");
+  // The frame's closed size (the letter) and open size (the full 4:5 portrait), stored for the stretch interaction
+  const stretchTo = (frame, t) => {
+    const g = frame._geo; if (!g) return;
+    frame._t = t;
+    frame.style.left = g.l + (g.fl - g.l) * t + "px";
+    frame.style.width = g.w + (g.fw - g.w) * t + "px";
+    frame.classList.toggle("is-open", t > 0.98);
+  };
   const placeFrame = () => {
     const hero = document.querySelector(".hero-d"), frame = document.querySelector(".pd-frame");
     if (!hero || !frame || !hero.offsetParent) return;
-    if (innerWidth < 760) { // phones: KODIKAR stretched tall, portrait in the O
-
-      // KODIKAR stays upright, fitted to the width, then stretched to fill everything under the credit block;
-      // the portrait then takes the O's place at the stretched size
-      const word = hero.querySelector(".pd-name .fit"), credit = hero.querySelector(".pd-credit");
+    const word = hero.querySelector(".pd-name .fit");
+    const letterOf = () => hero.querySelectorAll(".pd-l")[+(hero.querySelector(".pd-name").dataset.swap || 0)]; // 1 = the O in KODIKAR
+    let l, w, h;
+    if (innerWidth < 760) {
+      // phones: KODIKAR upright, fitted to the width, then stretched to fill everything under the credit block
+      const credit = hero.querySelector(".pd-credit");
       const top = credit.getBoundingClientRect().bottom - hero.getBoundingClientRect().top + 22;
-      const avail = hero.clientHeight - top - 14;
       word.style.transform = "";
-      const h = word.getBoundingClientRect().height;
-      word.style.transform = `scaleY(${Math.max(1, avail / h).toFixed(3)})`;
-      const hr2 = hero.getBoundingClientRect(), o = hero.querySelectorAll(".pd-l")[+(hero.querySelector(".pd-name").dataset.swap || 0)].getBoundingClientRect();
-      const p2 = o.width * 0.12;
-      frame.style.left = o.left - hr2.left - p2 + "px";
-      frame.style.width = o.width + p2 * 2 + "px";
-      frame.style.top = o.top - hr2.top + "px";
-      frame.style.height = o.height + "px";
-      return;
+      word.style.transform = `scaleY(${Math.max(1, (hero.clientHeight - top - 14) / word.getBoundingClientRect().height).toFixed(3)})`;
+      const hr = hero.getBoundingClientRect(), o = letterOf().getBoundingClientRect(), p = o.width * 0.12;
+      l = o.left - hr.left - p; w = o.width + p * 2; h = o.height;
+      frame.style.top = o.top - hr.top + "px";
+    } else {
+      word.style.transform = ""; // no stretch on wide screens
+      frame.style.top = "";
+      const hr = hero.getBoundingClientRect(), lr = letterOf().getBoundingClientRect(), p = lr.width * 0.06;
+      // height from the word's layout box (not its on-screen rect, which the entrance animation is still moving)
+      l = lr.left - hr.left - p; w = lr.width + p * 2; h = Math.min(hr.height * 0.86, word.offsetHeight * 1.27);
     }
-    hero.querySelector(".pd-name .fit").style.transform = ""; // no stretch on wide screens
-    frame.style.top = "";
-    const swap = +(hero.querySelector(".pd-name").dataset.swap || 0); // which letter the portrait replaces (1 = the O in KODIKAR)
-    const letter = hero.querySelectorAll(".pd-l")[swap];
-    const hr = hero.getBoundingClientRect(), lr = letter.getBoundingClientRect();
-    const pad = lr.width * 0.06;
-    frame.style.left = lr.left - hr.left - pad + "px";
-    frame.style.width = lr.width + pad * 2 + "px";
-    frame.style.height = Math.min(hr.height * 0.86, (hr.bottom - lr.top) * 1.32) + "px";
+    frame.style.height = h + "px";
+    const fw = Math.max(w, Math.min(h * 0.8, hero.clientWidth - 32));
+    const fl = Math.min(Math.max(l + w / 2 - fw / 2, 16), hero.clientWidth - 16 - fw);
+    frame._geo = { l, w, fw, fl };
+    stretchTo(frame, frame._t || 0);
   };
-  const layout = () => { fitAll(); placeFrame(); };
+
+  // Drag the photo sideways to stretch the O open (either direction); release snaps it open or shut; a tap toggles
+  const pdFrame = document.querySelector(".pd-frame");
+  if (pdFrame) {
+    let x0 = 0, t0 = 0, dragging = false;
+    pdFrame.addEventListener("pointerdown", (e) => {
+      x0 = e.clientX; t0 = pdFrame._t || 0; dragging = false;
+      pdFrame.setPointerCapture(e.pointerId);
+    });
+    pdFrame.addEventListener("pointermove", (e) => {
+      if (!pdFrame.hasPointerCapture(e.pointerId) || !pdFrame._geo) return;
+      const dx = Math.abs(e.clientX - x0);
+      if (!dragging && dx < 6) return;
+      dragging = true; pdFrame.classList.add("is-dragging");
+      const span = Math.max(1, pdFrame._geo.fw - pdFrame._geo.w);
+      stretchTo(pdFrame, Math.min(1, Math.max(0, t0 + (t0 < 0.5 ? 1 : -1) * (dx * 2) / span)));
+    });
+    const release = () => {
+      pdFrame.classList.remove("is-dragging");
+      stretchTo(pdFrame, dragging ? ((pdFrame._t || 0) > 0.5 ? 1 : 0) : (t0 > 0.5 ? 0 : 1));
+    };
+    pdFrame.addEventListener("pointerup", release);
+    pdFrame.addEventListener("pointercancel", () => { pdFrame.classList.remove("is-dragging"); stretchTo(pdFrame, t0); });
+  }
+
+  // Contact: LET'S TALK fitted to the width, then stretched tall like the phone intro
+  const stretchContact = () => {
+    const ct = document.querySelector(".contact-title .fit");
+    if (!ct) return;
+    ct.style.transform = "";
+    const h0 = ct.getBoundingClientRect().height;
+    ct.style.transform = "scaleY(1.7)";
+    ct.parentElement.style.height = h0 * 1.7 + "px";
+  };
+
+  const layout = () => { fitAll(); placeFrame(); stretchContact(); };
   layout();
   document.fonts && document.fonts.ready.then(layout);
   addEventListener("resize", layout);

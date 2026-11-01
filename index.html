@@ -31,7 +31,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- Display: Kaneda Gothic Bold once web-licensed (see style.css); Anton stands in until then. Labels: IBM Plex Mono Regular. -->
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=32">
+  <link rel="stylesheet" href="style.css?v=42">
 </head>
 <body>
 
@@ -97,10 +97,12 @@
           <span class="pd-halftone"></span>
           <span class="pd-grid"></span>
           <figcaption class="mono pd-cap">CAM A · 1.43 : 1</figcaption>
+          <span class="pd-hint" aria-hidden="true">↔ stretch</span>
         </figure>
         <h1 class="pd-name" aria-label="Pavan Ratnakar Kodikar" data-swap="1"><span class="fit">Kodikar</span></h1>
         <a class="pd-scroll" href="#work">Scroll <span aria-hidden="true">↓</span></a>
       </div>
+      <div class="ht-edge ht-edge--out" aria-hidden="true"></div>
 
       <!-- Option A: bolt-led -->
       <div class="hero-a">
@@ -152,89 +154,65 @@
 
     <!-- FEATURED -->
     <section id="work" class="featured">
-      <div class="label-row"><span class="mono">Featured work</span><span class="num" id="featured-count"></span></div>
+      <h2 class="sec-title reveal">Selected work</h2>
+      <div class="label-row"><span>Featured</span><span class="num" id="featured-count"></span></div>
       <div id="featured"></div>
     </section>
 
     <!-- INDEX -->
-    <section id="index" class="index">
-      <h2 class="big-title reveal">All <span class="fade">work</span></h2>
-      <div class="label-row mono idx-head"><span>No.</span><span>Title</span><span>Client</span><span>Watch</span></div>
+    <section id="index" class="index red-field">
+      <h2 class="sec-title reveal">All work</h2>
+      <div class="label-row idx-head"><span>No.</span><span>Title</span><span>Client</span><span>Play</span></div>
       <ol class="idx" id="idx"></ol>
     </section>
 
     <!-- REELS (editorial) -->
     <section class="reels">
       <div class="reels-head">
-        <h2 class="cond-title reveal">Reels<br><span>&amp; shorts</span></h2>
-        <p class="mono reels-note">Vertical edits for brands, cafés and campaigns. Made for the scroll, cut for the feeling.</p>
+        <h2 class="sec-title reveal">Reels &amp; shorts</h2>
+        <p class="reels-note">Vertical edits for brands, cafés and campaigns. Made for the scroll, cut for the feeling.</p>
       </div>
       <div class="reel-grid" id="reels"></div>
     </section>
 
-    <!-- ABOUT — poster -->
-    <section id="about" class="poster-wrap">
-      <article class="poster reveal">
-        <header class="poster-head">
-          <span class="poster-title">POST</span>
-          <span class="poster-block"></span>
-          <span class="poster-bars" aria-hidden="true"></span>
-        </header>
-
-        <div class="poster-media">
-          <video class="duo-media" src="assets/profile.mp4" autoplay muted loop playsinline></video>
-          <span class="halftone halftone--dense" aria-hidden="true"></span>
+    <!-- ABOUT: red poster with the profile portrait -->
+    <section id="about" class="about red-field">
+      <div class="about-grid">
+        <figure class="about-frame reveal">
+          <img src="assets/portrait-profile.jpg" alt="Pavan Ratnakar Kodikar in profile" width="1040" height="1300" loading="lazy">
+          <span class="pd-halftone"></span>
+          <span class="pd-grid"></span>
+          <figcaption class="mono pd-cap">CAM B · Profile</figcaption>
+        </figure>
+        <div class="about-copy">
+          <div class="about-meta"><span>about</span><span class="num">003</span></div>
+          <h2 class="about-title reveal">Post<br>production</h2>
+          <p class="about-lede">Tired of edits that just sit there? I'm Pavan, post production lead at Unico Creative Studios. I cut trailers, brand films, documentaries and reels that move with rhythm and feel graded on purpose.</p>
+          <p class="about-body">From the first assembly to the final colour pass, I handle story, pace, sound and grade, in English, Kannada and Hindi.</p>
+          <dl class="about-facts">
+            <div><dt>Based in</dt><dd>Bengaluru, IN</dd></div>
+            <div><dt>Role</dt><dd>Post production lead</dd></div>
+            <div><dt>Studio</dt><dd>Unico Creative Studios</dd></div>
+            <div><dt>Toolkit</dt><dd><ul id="tools-list"></ul></dd></div>
+          </dl>
         </div>
-
-        <h2 class="poster-name"><span class="poster-bars poster-bars--sm" aria-hidden="true"></span>PRODUCTION</h2>
-
-        <div class="poster-cols mono">
-          <p>Tired of edits that just sit there? I'm RK, post production lead at Unico Creative Studios. I cut trailers, brand films, documentaries and reels that move with rhythm and feel graded on purpose.</p>
-          <p>From the first assembly to the final colour pass, I handle story, pace, sound and grade, in English, Kannada and Hindi.</p>
-          <p>Based in<br>Bengaluru — IN<br>Video editor<br><br>Unico Creative<br>Studios</p>
-        </div>
-
-        <footer class="poster-foot">
-          <span class="poster-grad" aria-hidden="true"></span>
-          <div class="poster-tools">
-            <span class="mono tiny">Toolkit</span>
-            <ul id="tools-list"></ul>
-          </div>
-          <div class="poster-stamp">
-            <span class="mono tiny">Thegradedframes</span>
-            <span class="stamp-num">2026</span>
-            <span class="mono tiny">▮▮ Colour graded</span>
-          </div>
-        </footer>
-      </article>
-
-      <aside class="poster poster--strip reveal" aria-hidden="true">
-        <div class="strip-globe">✱</div>
-        <div class="strip-media">
-          <video class="duo-media" src="assets/hero.mp4" autoplay muted loop playsinline></video>
-          <span class="duo-tint"></span>
-          <span class="halftone"></span>
-        </div>
-        <div class="strip-row"><span class="strip-line"></span><span class="mono tiny">FILM</span></div>
-        <div class="strip-row"><span class="mono tiny">TONE</span><span class="strip-line"></span></div>
-        <span class="strip-tone"></span>
-        <span class="strip-code"></span>
-      </aside>
+      </div>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="contact">
-      <div class="label-row mono">
-        <span>Explore</span>
-        <span class="contact-nav"><a href="#work">Work</a><a href="#index">Index</a><a href="#about">Info</a><a href="#contact">Contact</a></span>
-        <svg class="bolt bolt--sm" viewBox="0 0 536 895" aria-hidden="true"><path class="b-main" d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/></svg>
-      </div>
+    <!-- CONTACT: ink poster -->
+    <section id="contact" class="contact ink-field">
+      <div class="contact-meta"><span>contact</span><span class="num">004</span></div>
+      <h2 class="contact-title"><span class="fit">Let's talk</span></h2>
       <a class="contact-mail" href="mailto:thegradedframes@gmail.com">thegradedframes@gmail.com<span class="arrow">↗</span></a>
-      <div class="contact-grid mono">
+      <div class="contact-grid">
         <a href="https://www.instagram.com/rk.pavan_" target="_blank" rel="noopener">Instagram ↗</a>
         <a href="tel:+919148458938">+91 91484 58938</a>
         <span>Bengaluru, India</span>
-        <span>© <span id="year"></span> RK</span>
+        <span>© <span id="year"></span> Pavan Ratnakar Kodikar</span>
+      </div>
+      <div class="contact-foot">
+        <svg class="bolt bolt--sm" viewBox="0 0 536 895" aria-hidden="true"><path class="b-main" d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/></svg>
+        <span class="contact-nav"><a href="#work">Work</a><a href="#index">Index</a><a href="#about">Info</a><a href="#contact">Contact</a></span>
       </div>
     </section>
   </main>
@@ -249,7 +227,7 @@
   </dialog>
 
   <script src="content.js?v=10"></script>
-  <script src="main.js?v=33"></script>
+  <script src="main.js?v=41"></script>
   <script src="interact.js?v=10"></script>
 </body>
 </html>
