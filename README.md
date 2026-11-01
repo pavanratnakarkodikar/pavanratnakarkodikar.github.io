@@ -13,7 +13,9 @@ Plain HTML/CSS/JS. You don't need to build anything or install any tools.
     python3 -m http.server 8000
 then open http://localhost:8000
 
-## Host for free (your own domain)
-- **Netlify**: drag this folder onto app.netlify.com/drop
-- **Vercel / Cloudflare Pages / GitHub Pages**: push this folder to a repo and connect it
-Then add your custom domain in that host's settings.
+## Live site
+https://pavanratnakarkodikar.github.io (GitHub Pages, from the `main` branch of
+github.com/pavanratnakarkodikar/pavanratnakarkodikar.github.io)
+
+To publish changes: commit and push to `main`; Pages rebuilds in about a minute.
+Without git, you can also edit or upload files directly on the repo's GitHub page.
