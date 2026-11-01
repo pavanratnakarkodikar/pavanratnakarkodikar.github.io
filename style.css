@@ -548,6 +548,7 @@ body::before {
   background: radial-gradient(circle, rgba(0, 0, 0, .22) 0 .8px, transparent 1.2px) 0 0 / 5px 5px;
 }
 .pd-meta, .pd-credit, .pd-side, .pd-scroll { position: absolute; z-index: 3; }
+.pd-bio { display: none; }
 .pd-meta { top: clamp(16px, 2.4vw, 32px); display: flex; flex-direction: column; font-weight: 700; letter-spacing: var(--track); line-height: 1; font-size: clamp(14px, 1.2vw, 18px); }
 .pd-meta--tl { left: calc(var(--rail) + var(--gutter)); }
 .pd-meta--tr { right: calc(var(--rail) + var(--gutter)); }
@@ -560,7 +561,7 @@ body::before {
 .pd-side--r { right: max(10px, calc(var(--rail) / 2 - 6px)); transform: translateY(-50%); }
 .pd-scroll { left: calc(var(--rail) + var(--gutter)); top: 46%; font-weight: 700; letter-spacing: -.04em; font-size: 15px; color: #0c0c0c; }
 
-.pd-name { position: absolute; z-index: 1; left: calc(var(--rail) + var(--gutter)); width: min(calc(100% - 2 * (var(--rail) + var(--gutter))), 92svh); bottom: -.06em; margin: 0; line-height: .78; overflow: visible; }
+.pd-name { position: absolute; z-index: 1; left: calc(var(--rail) + var(--gutter)); width: min(calc(100% - 2 * (var(--rail) + var(--gutter))), 128svh); bottom: -.06em; margin: 0; line-height: .78; overflow: visible; }
 .pd-name .fit { display: inline-block; white-space: nowrap; font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: -.005em; color: #0c0c0c; }
 
 .pd-frame {
@@ -588,12 +589,21 @@ body::before {
 .pd-name .fit { animation: rise 1.1s cubic-bezier(.2,.8,.2,1) both .2s; }
 
 @media (max-width: 760px) {
+  /* vertical phones, two rows:
+     top    = credit (name) left | 4:5 portrait right
+     bottom = KODIKAR running up the left edge | bio + scroll cue beside it */
   .hero-d { min-height: calc(100svh - 56px); }
-  .pd-credit { top: 64px; left: var(--gutter); right: auto; width: 70%; }
-  .pd-credit-name { font-size: 34px; }
-  .pd-frame { animation-name: pd-in-m; }
-  .pd-name { width: calc(100% - 2 * var(--gutter)); }
-  .pd-side, .pd-scroll { display: none; }
+  .pd-credit { top: 64px; left: var(--gutter); right: auto; width: calc(44vw - var(--gutter)); }
+  .pd-credit-name { font-size: clamp(22px, 7vw, 30px); }
+  .pd-credit-line { display: none; }
+  .pd-frame { left: auto !important; right: var(--gutter); top: 64px; bottom: auto; width: 54vw; height: auto; aspect-ratio: 4 / 5; animation-name: pd-in-m; }
+  .pd-media { object-position: 40% 0%; }
+  .pd-name { left: var(--gutter); top: auto; bottom: 16px; width: auto; }
+  .pd-name .fit { writing-mode: vertical-rl; transform: rotate(180deg); line-height: .8; animation: none; }
+  .pd-bio { display: block; position: absolute; z-index: 3; right: var(--gutter); bottom: 64px; width: 50vw; margin: 0;
+            font-weight: 700; letter-spacing: -.04em; line-height: 1.1; font-size: 15px; color: #0c0c0c; }
+  .pd-scroll { display: block; top: auto; bottom: 24px; left: auto; right: var(--gutter); }
+  .pd-side { display: none; }
   @keyframes pd-in-m { 0% { opacity: 0; transform: translateX(120%); filter: blur(14px) drop-shadow(-20px 0 rgba(255,45,45,.9)); } 100% { opacity: 1; transform: none; filter: none; } }
 }
 @media (prefers-reduced-motion: reduce) { .pd-frame, .pd-name .fit { animation: none; } }

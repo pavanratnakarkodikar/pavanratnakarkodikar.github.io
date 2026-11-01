@@ -68,9 +68,18 @@
   const placeFrame = () => {
     const hero = document.querySelector(".hero-d"), frame = document.querySelector(".pd-frame");
     if (!hero || !frame || !hero.offsetParent) return;
-    const letter = hero.querySelectorAll(".pd-l")[3]; // the second "A" in PAVAN
+    if (innerWidth < 760) { // vertical layout: CSS places the frame; the word runs up the left edge
+      frame.style.left = frame.style.width = frame.style.height = "";
+      // the word fills the space under the top row (credit | portrait)
+      const word = hero.querySelector(".pd-name .fit"), avail = hero.clientHeight - (64 + frame.offsetHeight + 28) - 16;
+      word.style.fontSize = "100px";
+      word.style.fontSize = (100 * avail) / word.scrollHeight + "px";
+      return;
+    }
+    const swap = +(hero.querySelector(".pd-name").dataset.swap || 0); // which letter the portrait replaces (1 = the O in KODIKAR)
+    const letter = hero.querySelectorAll(".pd-l")[swap];
     const hr = hero.getBoundingClientRect(), lr = letter.getBoundingClientRect();
-    const pad = lr.width * (innerWidth < 760 ? 0.38 : 0.06); // a little wider on phones so the face isn't cropped
+    const pad = lr.width * (innerWidth < 760 ? 0.62 : 0.06); // wider on phones so the face isn't cropped
     frame.style.left = lr.left - hr.left - pad + "px";
     frame.style.width = lr.width + pad * 2 + "px";
     frame.style.height = Math.min(hr.height * 0.86, (hr.bottom - lr.top) * 1.32) + "px";
