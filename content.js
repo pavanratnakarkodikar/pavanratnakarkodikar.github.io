@@ -9,7 +9,7 @@
 window.PORTFOLIO = {
   youtube: [
     { id: "mrFhygFY0ug", title: "Kashi", subtitle: "The City of Light", client: "Documentary trailer",
-      tags: ["Trailer", "Edit", "Colour"], featured: true },
+      tags: ["Trailer", "Edit"], featured: true },
     { id: "da3DOjYqVgs", title: "30 Minutes Strategy", subtitle: "ft. Sunil Chhetri", client: "White Gold × BFC",
       tags: ["Brand film", "Sports", "Edit"], featured: true },
     { id: "PzUnxnk6Dio", title: "White Gold × Kerala Blasters FC", subtitle: "White Gold", client: "White Gold",
@@ -17,7 +17,7 @@ window.PORTFOLIO = {
     { id: "w7jDm6ndg0E", title: "Firefly Journey", subtitle: "Anand Audio", client: "Anand Audio",
       tags: ["Music", "Edit"], featured: true },
     { id: "LYQg1dbE0rc", title: "Path to Glory", subtitle: "Ajna Amit — India's youngest MMA champion", client: "Documentary",
-      tags: ["Documentary", "Edit", "Colour"], featured: true },
+      tags: ["Documentary", "Edit"], featured: true },
     { id: "ieNHyExbpOo", title: "Best Exercise to Release Pledged Gold", client: "White Gold" },
     { id: "CS9MJSOZXL8", title: "Gold of Karnataka Ep. 1", client: "White Gold CSR" },
     { id: "7SvRv_55cA0", title: "The Joy of Fatherhood", client: "White Gold Money" },
