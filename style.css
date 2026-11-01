@@ -515,15 +515,18 @@ body::before {
 .contact-mail { letter-spacing: var(--track) !important; }
 .reel-cap b.num { font-size: 13px; margin-right: 4px; }
 
-/* title stack: lowercase bold sub on top, big Kaneda word, trailing word flush right */
-.stack-title { display: grid; width: fit-content; margin: 0 0 clamp(24px, 4vw, 48px); color: var(--red); }
-.st-sub, .st-trail { font-family: var(--sans); font-weight: 700; text-transform: lowercase; letter-spacing: var(--track); line-height: var(--lead); font-size: clamp(22px, 3.2vw, 52px); }
-.st-sub { margin-bottom: -.06em; }
-.st-big { font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: -.005em; line-height: .8; font-size: clamp(96px, 16vw, 280px); }
-.st-trail { justify-self: end; margin-top: .05em; }
-.index .stack-title { border-bottom: 0; }
-:root:not([data-theme="dark"]) .st-sub, :root:not([data-theme="dark"]) .st-trail { color: #0c0c0c; }
-
 /* Kaneda: tight leading everywhere */
+.big-title, .cond-title { text-transform: uppercase; line-height: .82; letter-spacing: -.005em; }
 .hero-name, .hero-name-full { line-height: .82; }
 .hero-name { letter-spacing: -.005em; }
+
+/* Mono is for technical metadata only (timecode, coordinates, film tags).
+   Names, labels and notes use the bold, tight text style. */
+.idx-client, .label-row, .reels-note, .reel-cap, .reel-more, .poster-cols, .contact-grid, .poster-tools .tiny, .feat-foot ul {
+  font-family: var(--sans); font-weight: 700; text-transform: none; letter-spacing: -.04em; line-height: 1.15;
+}
+.idx-client { font-size: 14px; }
+.label-row, .reel-more, .contact-grid { font-size: 15px; }
+.reels-note { font-size: 18px; line-height: 1.05; letter-spacing: -.05em; }
+.reel-cap { font-size: 14px; }
+.poster-cols { font-size: 14px; line-height: 1.2; }
