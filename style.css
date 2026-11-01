@@ -796,3 +796,6 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; } /* Lenis d
 
 /* with the ticker band gone, give Selected work clear air below the showreel */
 #work { padding-top: clamp(72px, 9vw, 140px); }
+
+/* showreel: no black-and-white filter (the halftone dots and red grid stay) */
+.hero-film .duo-media { filter: none; }
