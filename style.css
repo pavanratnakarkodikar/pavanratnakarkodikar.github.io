@@ -783,3 +783,9 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; } /* Lenis d
   .pd-credit-r .pd-credit-line { width: 0; min-width: 100%; text-align: left; font-size: 1.22cqw; line-height: 1.1; letter-spacing: -.035em; text-wrap: balance; }
 }
 
+
+/* showreel on laptops/monitors: the whole clip fits on one screen (below the top bar, with breathing room),
+   centred, instead of running the full page width and spilling past the bottom */
+@media (min-width: 761px) {
+  .hero-film { width: min(100%, calc((100svh - 160px) * 1522 / 1080)); margin-inline: auto; }
+}
