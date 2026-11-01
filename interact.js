@@ -123,12 +123,14 @@
       film.style.setProperty("--grow", (0.9 + q * 0.1).toFixed(4));
 
       // ticker follows scroll direction and speeds up with scroll velocity
+      if (track) {
       const half = track.scrollWidth / 2;
       tickX -= tickDir * (0.6 + Math.min(Math.abs(vel) * 6, 14)) * (dt / 16);
       if (tickX <= -half) tickX += half;
       if (tickX > 0) tickX -= half;
       const skew = clamp(-vel * 3, -12, 12);
       track.style.transform = `translateX(${tickX}px) skewX(${skew}deg)`;
+      }
 
       // cursor follows with a little lag
       if (cursor) {

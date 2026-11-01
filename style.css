@@ -793,3 +793,6 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; } /* Lenis d
 /* Selected work: thumbnails at their original 16:9, uncropped (no hover zoom either) */
 .feat-media { aspect-ratio: 16 / 9; }
 .feat-media:hover img { transform: none; }
+
+/* with the ticker band gone, give Selected work clear air below the showreel */
+#work { padding-top: clamp(72px, 9vw, 140px); }
