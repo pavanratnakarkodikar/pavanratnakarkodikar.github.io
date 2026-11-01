@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RK — Post Production Lead · Bengaluru</title>
+  <meta name="description" content="RK (Pavan) — video editor and post production lead at Unico Creative Studios, Bengaluru.">
+  <meta name="theme-color" content="#f9f9f9">
+  <script>
+    // Pick theme before paint: ?theme=dark|light, else the visitor's last choice.
+    (function () {
+      var q = new URLSearchParams(location.search).get("theme"), t = q;
+      try { t = q || localStorage.getItem("rk-theme"); } catch (e) {}
+      if (t === "dark") document.documentElement.dataset.theme = "dark";
+    })();
+  </script>
+  <meta property="og:title" content="RK — Post Production Lead">
+  <meta property="og:description" content="Video editing, colour and post production. Bengaluru.">
+  <meta property="og:image" content="assets/reel-amudham.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Climate+Crisis:YEAR@1979..2050&family=Archivo:wdth,wght@62..125,400..900&family=Inter+Tight:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=9">
+</head>
+<body>
+
+  <!-- side rails (desktop) -->
+  <aside class="rail rail--left" aria-hidden="true">
+    <span>Made with intent.</span>
+    <span>Post — Production</span>
+    <span>Made with intent.</span>
+  </aside>
+  <aside class="rail rail--right">
+    <span aria-hidden="true">BLR → Everywhere</span>
+    <a class="rail-ig" href="https://www.instagram.com/rk.pavan_" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+    </a>
+    <span aria-hidden="true">BLR → Everywhere</span>
+  </aside>
+
+  <!-- top bar -->
+  <header class="top">
+    <a href="#" class="mark" aria-label="RK home">RK<sup>®</sup></a>
+    <nav class="top-nav">
+      <a href="#work">Work</a>
+      <a href="#index">Index</a>
+      <a href="#about">Info</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="top-end">
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20V2z"/><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+      </button>
+      <a class="pill" href="mailto:thegradedframes@gmail.com">Let's talk</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- HERO -->
+    <section class="hero">
+      <h1 class="wordmark" aria-label="RK"><span class="fit">RK</span></h1>
+
+      <div class="hero-sub">
+        <p class="lede">Video editor &amp; post production lead,<br>cutting stories at Unico Creative Studios.</p>
+        <ul class="mono hero-meta">
+          <li>Bengaluru, IN</li>
+          <li>12.97° N — 77.59° E</li>
+          <li><span class="dot"></span> Available for projects</li>
+        </ul>
+      </div>
+
+      <div class="hero-film">
+        <video id="hero-video" class="duo-media" src="assets/hero.mp4" autoplay muted loop playsinline></video>
+        <span class="duo-tint" aria-hidden="true"></span>
+        <span class="halftone" aria-hidden="true"></span>
+        <span class="mono film-tag film-tag--tl">Showreel / 2026</span>
+        <span class="mono film-tag film-tag--tr">FILM ▌▌▌▌</span>
+        <span class="mono film-tag film-tag--br">RK — Pavan</span>
+      </div>
+    </section>
+
+    <!-- TICKER -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>Editing</span><span>✱</span><span>Colour grading</span><span>✱</span><span>Motion</span><span>✱</span><span>Post production</span><span>✱</span><span>Documentary</span><span>✱</span><span>Brand films</span><span>✱</span>
+        <span>Editing</span><span>✱</span><span>Colour grading</span><span>✱</span><span>Motion</span><span>✱</span><span>Post production</span><span>✱</span><span>Documentary</span><span>✱</span><span>Brand films</span><span>✱</span>
+      </div>
+    </div>
+
+    <!-- FEATURED -->
+    <section id="work" class="featured">
+      <div class="label-row"><span class="mono">Featured work</span><span class="mono" id="featured-count"></span></div>
+      <div id="featured"></div>
+    </section>
+
+    <!-- INDEX -->
+    <section id="index" class="index">
+      <h2 class="big-title reveal">All <span class="fade">work</span></h2>
+      <div class="label-row mono idx-head"><span>No.</span><span>Title</span><span>Client</span><span>Watch</span></div>
+      <ol class="idx" id="idx"></ol>
+    </section>
+
+    <!-- REELS (editorial) -->
+    <section class="reels">
+      <div class="reels-head">
+        <h2 class="cond-title reveal">REELS<br><span>&amp; SHORTS</span></h2>
+        <p class="mono reels-note">Vertical edits for brands, cafés and campaigns. Made for the scroll, cut for the feeling.</p>
+      </div>
+      <div class="reel-grid" id="reels"></div>
+    </section>
+
+    <!-- ABOUT — poster -->
+    <section id="about" class="poster-wrap">
+      <article class="poster reveal">
+        <header class="poster-head">
+          <span class="poster-title">POST</span>
+          <span class="poster-block"></span>
+          <span class="poster-bars" aria-hidden="true"></span>
+        </header>
+
+        <div class="poster-media">
+          <video class="duo-media" src="assets/profile.mp4" autoplay muted loop playsinline></video>
+          <span class="halftone halftone--dense" aria-hidden="true"></span>
+        </div>
+
+        <h2 class="poster-name"><span class="poster-bars poster-bars--sm" aria-hidden="true"></span>PRODUCTION</h2>
+
+        <div class="poster-cols mono">
+          <p>Tired of edits that just sit there? I'm RK, post production lead at Unico Creative Studios. I cut trailers, brand films, documentaries and reels that move with rhythm and feel graded on purpose.</p>
+          <p>From the first assembly to the final colour pass, I handle story, pace, sound and grade, in English, Kannada and Hindi.</p>
+          <p>Based in<br>Bengaluru — IN<br>Video editor<br><br>Unico Creative<br>Studios</p>
+        </div>
+
+        <footer class="poster-foot">
+          <span class="poster-grad" aria-hidden="true"></span>
+          <div class="poster-tools">
+            <span class="mono tiny">Toolkit</span>
+            <ul id="tools-list"></ul>
+          </div>
+          <div class="poster-stamp">
+            <span class="mono tiny">Thegradedframes</span>
+            <span class="stamp-num">2026</span>
+            <span class="mono tiny">▮▮ Colour graded</span>
+          </div>
+        </footer>
+      </article>
+
+      <aside class="poster poster--strip reveal" aria-hidden="true">
+        <div class="strip-globe">✱</div>
+        <div class="strip-media">
+          <video class="duo-media" src="assets/hero.mp4" autoplay muted loop playsinline></video>
+          <span class="duo-tint"></span>
+          <span class="halftone"></span>
+        </div>
+        <div class="strip-row"><span class="strip-line"></span><span class="mono tiny">FILM</span></div>
+        <div class="strip-row"><span class="mono tiny">TONE</span><span class="strip-line"></span></div>
+        <span class="strip-tone"></span>
+        <span class="strip-code"></span>
+      </aside>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact">
+      <div class="label-row mono">
+        <span>Explore</span>
+        <span class="contact-nav"><a href="#work">Work</a><a href="#index">Index</a><a href="#about">Info</a><a href="#contact">Contact</a></span>
+        <span class="mark mark--sm">RK<sup>®</sup></span>
+      </div>
+      <a class="contact-mail" href="mailto:thegradedframes@gmail.com">thegradedframes@gmail.com<span class="arrow">↗</span></a>
+      <div class="contact-grid mono">
+        <a href="https://www.instagram.com/rk.pavan_" target="_blank" rel="noopener">Instagram ↗</a>
+        <a href="tel:+919148458938">+91 91484 58938</a>
+        <span>Bengaluru, India</span>
+        <span>© <span id="year"></span> RK</span>
+      </div>
+    </section>
+  </main>
+
+  <!-- hover preview for index rows -->
+  <div class="peek" id="peek" aria-hidden="true"><img alt=""></div>
+
+  <!-- video lightbox -->
+  <dialog class="lightbox" id="lightbox">
+    <button class="lightbox-close mono" type="button">Close ✕</button>
+    <div class="lightbox-player" id="player"></div>
+  </dialog>
+
+  <script src="content.js?v=9"></script>
+  <script src="main.js?v=9"></script>
+  <script src="interact.js?v=9"></script>
+</body>
+</html>
