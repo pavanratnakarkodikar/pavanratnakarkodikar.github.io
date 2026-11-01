@@ -3,7 +3,7 @@
 //  Add / remove / reorder items and refresh the page.
 //  YouTube: paste just the video ID (the part after youtu.be/).
 //  featured: true  → shown as a big row at the top (currently 5).
-//  Everything else appears in the "All work" index.
+//  Everything else appears in the "All work" index; give each a type (TVC, Brand film, Promo...).
 // ─────────────────────────────────────────────────────────────
 
 window.PORTFOLIO = {
@@ -19,14 +19,14 @@ window.PORTFOLIO = {
     { id: "LYQg1dbE0rc", title: "Path to Glory", subtitle: "Ajna Amit — India's youngest MMA champion", client: "Documentary",
       tags: ["Documentary", "Edit"], featured: true },
     { id: "w7jDm6ndg0E", title: "Firefly Journey", subtitle: "Anand Audio", client: "Anand Audio",
-      tags: ["Music", "Edit"] },
-    { id: "dWlFInODuJA", title: "Firefly Theme Lyrical", client: "Anand Audio" },
-    { id: "CS9MJSOZXL8", title: "Gold of Karnataka Ep. 1", client: "White Gold CSR" },
-    { id: "7SvRv_55cA0", title: "The Joy of Fatherhood", client: "White Gold Money" },
-    { id: "UOndBAOxrqE", title: "Don't Hold Your Dreams Back", client: "White Gold" },
-    { id: "IX94m5XhA3w", title: "Two Sisters, One Trust", client: "White Gold Money" },
-    { id: "hUTH6EnWEFk", title: "A Wife's Support", client: "White Gold Money" },
-    { id: "sSLqAVcemWY", title: "Back to Glory", client: "White Gold Money" },
+      tags: ["Promo", "Edit"], type: "Promo" },
+    { id: "dWlFInODuJA", title: "Firefly Theme Lyrical", client: "Anand Audio", type: "Lyrical" },
+    { id: "CS9MJSOZXL8", title: "Gold of Karnataka Ep. 1", client: "White Gold CSR", type: "Series" },
+    { id: "7SvRv_55cA0", title: "The Joy of Fatherhood", client: "White Gold Money", type: "Brand film" },
+    { id: "UOndBAOxrqE", title: "Don't Hold Your Dreams Back", client: "White Gold", type: "TVC" },
+    { id: "IX94m5XhA3w", title: "Two Sisters, One Trust", client: "White Gold Money", type: "TVC" },
+    { id: "hUTH6EnWEFk", title: "A Wife's Support", client: "White Gold Money", type: "TVC" },
+    { id: "sSLqAVcemWY", title: "Back to Glory", client: "White Gold Money", type: "TVC" },
   ],
 
   // Vertical reels: poster image in /assets, link to the post.

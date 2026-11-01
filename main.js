@@ -36,7 +36,8 @@
       <button class="idx-row" data-yt="${v.id}" data-thumb="${thumb(v.id, "hqdefault")}">
         <span class="num idx-num">${pad(featured.length + i + 1, 3)}</span>
         <span class="idx-title">${esc(v.title)}</span>
-        <span class="mono idx-client">${esc(v.client)}</span>
+        <span class="idx-type">${esc(v.type || "")}</span>
+        <span class="mono idx-client" data-type="${esc(v.type || "")}">${esc(v.client)}</span>
         <span class="idx-play" aria-hidden="true">▶</span>
         <img class="idx-thumb" src="${thumb(v.id, "mqdefault")}" alt="" loading="lazy">
       </button>
