@@ -799,3 +799,5 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; } /* Lenis d
 
 /* showreel: no black-and-white filter (the halftone dots and red grid stay) */
 .hero-film .duo-media { filter: none; }
+/* the new showreel render is exactly 1522x1080, so no zoom is needed to hide side bars */
+.hero-film .duo-media { transform: none; }
