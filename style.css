@@ -696,8 +696,6 @@ body::before {
 .pd-frame.is-dragging { cursor: grabbing; transition: none; }
 .pd-frame .pd-grid { transition: opacity .4s; }
 .pd-frame.is-open .pd-grid { opacity: .25; }
-.pd-hint { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); z-index: 3; padding: 4px 8px; background: var(--red); color: #0c0c0c; font: 700 11px/1 var(--sans); letter-spacing: -.02em; white-space: nowrap; transition: opacity .3s; pointer-events: none; }
-.pd-frame.is-open .pd-hint, .pd-frame.is-dragging .pd-hint { opacity: 0; }
 
 @media (max-width: 760px) {
   :root { --edge: 72px; }
