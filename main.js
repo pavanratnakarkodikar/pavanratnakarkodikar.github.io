@@ -11,7 +11,6 @@
   const rest = data.youtube.filter((v) => !v.featured);
 
   // Featured rows
-  $("#featured-count").textContent = pad(featured.length, 3);
   $("#featured").innerHTML = featured.map((v, i) => `
     <article class="feat reveal">
       <button class="feat-media" data-yt="${v.id}" aria-label="Play ${esc(v.title)}">
@@ -48,7 +47,7 @@
     <a class="reel reel--${i + 1} reveal" href="${r.url}" target="_blank" rel="noopener">
       <span class="mono reel-more">Watch on Instagram ↗</span>
       <span class="reel-img"><img src="${r.poster}" alt="${esc(r.title)}" loading="lazy"></span>
-      <span class="reel-cap mono"><b class="num">${pad(i + 1, 3)}</b> ${esc(r.title)} — ${esc(r.client)}.<br>${esc(r.note || "")}</span>
+      <span class="reel-cap mono"><b>${esc(r.title)}</b> — ${esc(r.client)}.<br>${esc(r.note || "")}</span>
     </a>`).join("");
 
   $("#tools-list").innerHTML = data.tools.map((t) =>
