@@ -789,3 +789,7 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; } /* Lenis d
 @media (min-width: 761px) {
   .hero-film { width: min(100%, calc((100svh - 160px) * 1522 / 1080)); margin-inline: auto; }
 }
+
+/* Selected work: thumbnails at their original 16:9, uncropped (no hover zoom either) */
+.feat-media { aspect-ratio: 16 / 9; }
+.feat-media:hover img { transform: none; }
