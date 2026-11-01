@@ -767,3 +767,11 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; } /* Lenis d
 :root { --ease: cubic-bezier(.4, 0, .2, 1); }
 .top { transition: transform .5s var(--ease); }
 .top.is-hidden { transform: translateY(-100%); }
+
+/* top-right credit: mirrors the name block on the left (same size and style), with the role line under it,
+   level with KODIKAR's last line. Phones keep the small "portfolio — 2026" label instead. */
+.pd-credit-tag { display: none; }
+@media (min-width: 761px) {
+  .pd-credit-r { display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; align-self: stretch; text-align: right; }
+  .pd-credit-tag { display: block; margin: 0; font-weight: 700; letter-spacing: var(--track); line-height: var(--lead); font-size: 2.9cqw; text-transform: uppercase; }
+}
