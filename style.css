@@ -706,3 +706,10 @@ body::before {
   .contact-foot .contact-nav { display: none; }
   .pd-frame.is-open .pd-media { transform: none; }
 }
+
+/* Display titles use Kaneda Gothic BOLD (the brand weight). font-synthesis stops browsers faking
+   a bold on the Anton stand-in, which is already heavy. */
+.sec-title, .big-title, .cond-title, .hero-name, .hero-name-full .fit, .pd-name .fit, .about-title,
+.contact-title .fit, .ticker-track, .stamp-num, .poster-title, .poster-name {
+  font-weight: 700; font-synthesis: none;
+}
