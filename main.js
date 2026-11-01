@@ -62,9 +62,23 @@
     el.style.fontSize = "100px";
     el.style.fontSize = (100 * el.parentElement.clientWidth) / el.scrollWidth + "px";
   });
-  fitAll();
-  document.fonts && document.fonts.ready.then(fitAll);
-  addEventListener("resize", fitAll);
+  // Poster hero: the portrait frame replaces one letter of the name (RE·MA style)
+  const pdWord = document.querySelector(".pd-name .fit");
+  if (pdWord) pdWord.innerHTML = [...pdWord.textContent].map((c) => `<span class="pd-l">${c}</span>`).join("");
+  const placeFrame = () => {
+    const hero = document.querySelector(".hero-d"), frame = document.querySelector(".pd-frame");
+    if (!hero || !frame || !hero.offsetParent) return;
+    const letter = hero.querySelectorAll(".pd-l")[3]; // the second "A" in PAVAN
+    const hr = hero.getBoundingClientRect(), lr = letter.getBoundingClientRect();
+    const pad = lr.width * (innerWidth < 760 ? 0.38 : 0.06); // a little wider on phones so the face isn't cropped
+    frame.style.left = lr.left - hr.left - pad + "px";
+    frame.style.width = lr.width + pad * 2 + "px";
+    frame.style.height = Math.min(hr.height * 0.86, (hr.bottom - lr.top) * 1.32) + "px";
+  };
+  const layout = () => { fitAll(); placeFrame(); };
+  layout();
+  document.fonts && document.fonts.ready.then(layout);
+  addEventListener("resize", layout);
 
   // Lightbox player
   const box = $("#lightbox"), player = $("#player");

@@ -12,8 +12,8 @@
       var q = new URLSearchParams(location.search).get("theme"), t = q;
       try { t = q || localStorage.getItem("rk-theme"); } catch (e) {}
       if (t === "dark") document.documentElement.dataset.theme = "dark";
-      // hero direction preview: ?hero=a (bolt-led), b (poster stack) or c (one line)
-      var hq = new URLSearchParams(location.search).get("hero"); document.documentElement.dataset.hero = /^[abc]$/.test(hq || "") ? hq : "a";
+      // hero direction preview: ?hero=d (poster, default), a (bolt-led), b (stack) or c (one line)
+      var hq = new URLSearchParams(location.search).get("hero"); document.documentElement.dataset.hero = /^[abcd]$/.test(hq || "") ? hq : "d";
       // pre-roll sting plays once per visit
       try {
         if (sessionStorage.getItem("rk-preroll")) document.documentElement.classList.add("no-preroll");
@@ -31,7 +31,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- Display: Kaneda Gothic Bold once web-licensed (see style.css); Anton stands in until then. Labels: IBM Plex Mono Regular. -->
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=19">
+  <link rel="stylesheet" href="style.css?v=23">
 </head>
 <body>
 
@@ -82,6 +82,26 @@
 
     <!-- HERO -->
     <section class="hero">
+      <!-- Option D: poster. Red field, giant name, framed portrait standing in the letters. -->
+      <div class="hero-d" id="hero-d">
+        <div class="pd-meta pd-meta--tl"><span>portfolio — 2026</span><span>post production &amp; edit</span></div>
+        <div class="pd-meta pd-meta--tr"><span class="num">001</span></div>
+        <div class="pd-credit">
+          <p class="pd-credit-name">Ratnakar<br>Kodikar</p>
+          <p class="pd-credit-line">Video editor &amp; post production lead at Unico Creative Studios. Cutting stories in English, Kannada and Hindi.</p>
+        </div>
+        <span class="mono pd-side pd-side--l">Bengaluru, IN · 12.97° N — 77.59° E</span>
+        <span class="mono pd-side pd-side--r">Edit · Colour · Motion · 24 fps</span>
+        <figure class="pd-frame">
+          <img class="pd-media" src="assets/portrait.jpg" alt="Pavan Ratnakar Kodikar checking his watch" width="1200" height="1500">
+          <span class="pd-halftone"></span>
+          <span class="pd-grid"></span>
+          <figcaption class="mono pd-cap">CAM A · 1.43 : 1</figcaption>
+        </figure>
+        <h1 class="pd-name" aria-label="Pavan Ratnakar Kodikar"><span class="fit">Pavan</span></h1>
+        <a class="pd-scroll" href="#work">Scroll <span aria-hidden="true">↓</span></a>
+      </div>
+
       <!-- Option A: bolt-led -->
       <div class="hero-a">
         <svg class="hero-bolt" viewBox="0 0 536 895" role="img" aria-label="RK bolt"><path class="b-r" d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/><path class="b-f" d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/><path class="b-main" d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/></svg>
@@ -229,7 +249,7 @@
   </dialog>
 
   <script src="content.js?v=10"></script>
-  <script src="main.js?v=17"></script>
+  <script src="main.js?v=24"></script>
   <script src="interact.js?v=10"></script>
 </body>
 </html>
