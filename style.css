@@ -772,7 +772,14 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; } /* Lenis d
    level with KODIKAR's last line. Phones keep the small "portfolio — 2026" label instead. */
 .pd-credit-tag { display: none; }
 @media (min-width: 761px) {
-  .pd-credit-r { display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; align-self: stretch; text-align: right; }
-  .pd-credit-tag { display: block; margin: 0; font-weight: 700; letter-spacing: var(--track); line-height: var(--lead); font-size: 2.9cqw; text-transform: uppercase; }
+  /* Editorial balance: two columns hung from the same top line. The name (left) and PORTFOLIO (right) share
+     size, weight, tracking and cap height, so they read as a mirrored pair. The right column is exactly as
+     wide as the word PORTFOLIO, flush left, and its right edge lines up with the end of KODIKAR below. The
+     designation wraps inside that column as a quieter second level, and its last line sits on the same
+     baseline as the name's last line, so both blocks start and end together. */
+  .pd-credit { grid-template-columns: auto auto; justify-content: space-between; align-items: stretch; }
+  .pd-credit-r { display: flex; flex-direction: column; justify-content: space-between; align-items: stretch; text-align: left; }
+  .pd-credit-tag { display: block; margin: 0; font-weight: 700; letter-spacing: var(--track); line-height: var(--lead); font-size: 2.9cqw; text-transform: uppercase; white-space: nowrap; }
+  .pd-credit-r .pd-credit-line { width: 0; min-width: 100%; text-align: left; font-size: 1.22cqw; line-height: 1.1; letter-spacing: -.035em; text-wrap: balance; }
 }
 
