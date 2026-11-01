@@ -68,20 +68,30 @@
   const placeFrame = () => {
     const hero = document.querySelector(".hero-d"), frame = document.querySelector(".pd-frame");
     if (!hero || !frame || !hero.offsetParent) return;
-    if (innerWidth < 760) { // vertical layout: CSS places the frame; the word runs up the left edge
-      frame.style.left = frame.style.width = frame.style.height = "";
-      // KODIKAR stays upright, fitted to the width, then stretched tall to fill the space under the top row
-      const word = hero.querySelector(".pd-name .fit"), avail = hero.clientHeight - (64 + frame.offsetHeight + 24) - 14;
+    if (innerWidth < 760) { // phones: KODIKAR stretched tall, portrait in the O
+
+      // KODIKAR stays upright, fitted to the width, then stretched to fill everything under the credit block;
+      // the portrait then takes the O's place at the stretched size
+      const word = hero.querySelector(".pd-name .fit"), credit = hero.querySelector(".pd-credit");
+      const top = credit.getBoundingClientRect().bottom - hero.getBoundingClientRect().top + 22;
+      const avail = hero.clientHeight - top - 14;
       word.style.transform = "";
       const h = word.getBoundingClientRect().height;
       word.style.transform = `scaleY(${Math.max(1, avail / h).toFixed(3)})`;
+      const hr2 = hero.getBoundingClientRect(), o = hero.querySelectorAll(".pd-l")[+(hero.querySelector(".pd-name").dataset.swap || 0)].getBoundingClientRect();
+      const p2 = o.width * 0.12;
+      frame.style.left = o.left - hr2.left - p2 + "px";
+      frame.style.width = o.width + p2 * 2 + "px";
+      frame.style.top = o.top - hr2.top + "px";
+      frame.style.height = o.height + "px";
       return;
     }
     hero.querySelector(".pd-name .fit").style.transform = ""; // no stretch on wide screens
+    frame.style.top = "";
     const swap = +(hero.querySelector(".pd-name").dataset.swap || 0); // which letter the portrait replaces (1 = the O in KODIKAR)
     const letter = hero.querySelectorAll(".pd-l")[swap];
     const hr = hero.getBoundingClientRect(), lr = letter.getBoundingClientRect();
-    const pad = lr.width * (innerWidth < 760 ? 0.62 : 0.06); // wider on phones so the face isn't cropped
+    const pad = lr.width * 0.06;
     frame.style.left = lr.left - hr.left - pad + "px";
     frame.style.width = lr.width + pad * 2 + "px";
     frame.style.height = Math.min(hr.height * 0.86, (hr.bottom - lr.top) * 1.32) + "px";
