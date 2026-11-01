@@ -73,7 +73,8 @@
     frame.classList.toggle("is-open", t > 0.98);
   };
   const placeFrame = () => {
-    const hero = document.querySelector(".hero-d"), frame = document.querySelector(".pd-frame");
+    // measurements are relative to the artboard, so the composition is the same at any screen size
+    const hero = document.querySelector(".pd-board"), frame = document.querySelector(".pd-frame");
     if (!hero || !frame || !hero.offsetParent) return;
     const phone = innerWidth < 760;
     // KODIKAR is fitted to the width, then stretched up (from its baseline) to meet the name strip.
@@ -81,7 +82,7 @@
     // animation don't affect, so the result is the same whenever this runs.
     const word = hero.querySelector(".pd-name .fit"), credit = hero.querySelector(".pd-credit"), name = hero.querySelector(".pd-name");
     word.style.transform = "";
-    const top = credit.offsetTop + credit.offsetHeight + (phone ? 22 : 30);
+    const top = credit.offsetTop + credit.offsetHeight + (phone ? 22 : hero.clientWidth * 0.022); // gap scales with the artboard
     const wordBox = () => ({ t: name.offsetTop + word.offsetTop, h: word.offsetHeight });
     let wb = wordBox();
     // short windows: the width-fitted word is already taller than the space under the strip, so shrink it to fit

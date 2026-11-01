@@ -728,3 +728,22 @@ body::before {
   .pd-credit-line { margin: 0; text-align: right; font-size: clamp(15px, 1.2vw, 19px); }
   .pd-name .fit { transform-origin: 50% 100%; }
 }
+
+/* ── the intro artboard: one fixed composition that scales as a whole ──────────
+   On laptops/monitors it is 16:9, sized to fit the screen (width or height, whichever
+   runs out first), and everything inside is measured in cqw (1cqw = 1% of the artboard
+   width), so a 13" laptop and a 27" monitor show identical proportions. The red field
+   fills any space around it. Phones keep their own full-height vertical poster. */
+.pd-board { position: relative; z-index: 1; min-height: inherit; }
+@media (min-width: 761px) {
+  :root[data-hero="d"] .hero-d { min-height: 0; display: flex; justify-content: center; } /* centre the artboard */
+  .pd-board { width: min(100%, calc((100svh - 58px) * 16 / 9)); aspect-ratio: 16 / 9; min-height: 0; container-type: inline-size; }
+  .pd-credit { top: 2.4cqw; left: 2.4cqw; right: 2.4cqw; gap: 2cqw; }
+  .pd-credit-name { font-size: 2.9cqw; }
+  .pd-credit-line { font-size: 1.2cqw; }
+  .pd-name { left: 2.4cqw; width: calc(100% - 4.8cqw); }
+  .pd-side { font-size: .78cqw; }
+  .pd-side--l { left: .7cqw; }
+  .pd-side--r { right: .7cqw; }
+  .pd-cap { font-size: .68cqw; left: .6cqw; top: .5cqw; }
+}

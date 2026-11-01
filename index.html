@@ -31,7 +31,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- Display: Kaneda Gothic Bold once web-licensed (see style.css); Anton stands in until then. Labels: IBM Plex Mono Regular. -->
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=65">
+  <link rel="stylesheet" href="style.css?v=71">
 </head>
 <body>
 
@@ -70,21 +70,24 @@
     <section class="hero">
       <!-- Option D: poster. Red field, giant name, framed portrait standing in the letters. -->
       <div class="hero-d" id="hero-d">
-        <div class="pd-meta pd-meta--tl"><span>portfolio — 2026</span><span>post production &amp; edit</span></div>
-        <div class="pd-credit">
-          <p class="pd-credit-name">Pavan<br>Ratnakar<br>Kodikar</p>
-          <p class="pd-credit-line">Video editor &amp; post production lead at Unico Creative Studios.</p>
+        <!-- the artboard: one fixed composition that scales as a whole (16:9 on laptops/monitors) -->
+        <div class="pd-board">
+          <div class="pd-meta pd-meta--tl"><span>portfolio — 2026</span><span>post production &amp; edit</span></div>
+          <div class="pd-credit">
+            <p class="pd-credit-name">Pavan<br>Ratnakar<br>Kodikar</p>
+            <p class="pd-credit-line">Video editor &amp; post production lead at Unico Creative Studios.</p>
+          </div>
+          <span class="mono pd-side pd-side--l">Bengaluru, IN · 12.97° N — 77.59° E</span>
+          <span class="mono pd-side pd-side--r">Edit · Colour · Motion · 24 fps</span>
+          <figure class="pd-frame">
+            <img class="pd-media" src="assets/portrait.jpg" alt="Pavan Ratnakar Kodikar checking his watch" width="1200" height="1500">
+            <span class="pd-halftone"></span>
+            <span class="pd-grid"></span>
+            <figcaption class="mono pd-cap">CAM A · 1.43 : 1</figcaption>
+          </figure>
+          <h1 class="pd-name" aria-label="Pavan Ratnakar Kodikar" data-swap="1"><span class="fit">Kodikar</span></h1>
+          <a class="pd-scroll" href="#work">Scroll <span aria-hidden="true">↓</span></a>
         </div>
-        <span class="mono pd-side pd-side--l">Bengaluru, IN · 12.97° N — 77.59° E</span>
-        <span class="mono pd-side pd-side--r">Edit · Colour · Motion · 24 fps</span>
-        <figure class="pd-frame">
-          <img class="pd-media" src="assets/portrait.jpg" alt="Pavan Ratnakar Kodikar checking his watch" width="1200" height="1500">
-          <span class="pd-halftone"></span>
-          <span class="pd-grid"></span>
-          <figcaption class="mono pd-cap">CAM A · 1.43 : 1</figcaption>
-        </figure>
-        <h1 class="pd-name" aria-label="Pavan Ratnakar Kodikar" data-swap="1"><span class="fit">Kodikar</span></h1>
-        <a class="pd-scroll" href="#work">Scroll <span aria-hidden="true">↓</span></a>
       </div>
       <div class="ht-edge ht-edge--out" aria-hidden="true"></div>
 
@@ -211,7 +214,7 @@
   </dialog>
 
   <script src="content.js?v=10"></script>
-  <script src="main.js?v=65"></script>
+  <script src="main.js?v=71"></script>
   <script src="interact.js?v=10"></script>
 </body>
 </html>
