@@ -201,7 +201,8 @@
       allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
     box.showModal();
   });
-  box.addEventListener("close", () => (player.innerHTML = ""));
+  box.addEventListener("close", () => { player.innerHTML = ""; window.lenis && lenis.start(); });
+  new MutationObserver(() => box.open && window.lenis && lenis.stop()).observe(box, { attributes: true, attributeFilter: ["open"] });
   $(".lightbox-close").addEventListener("click", () => box.close());
   box.addEventListener("click", (e) => { if (e.target === box) box.close(); });
 
@@ -217,11 +218,32 @@
     });
   }
 
-  // Reveal on scroll
+  // Reveal on scroll: titles and blocks glide up as they enter; rows in a list follow each other a beat apart
+  document.querySelectorAll(".sec-title, .label-row, .about-copy, .about-facts, .profile, .contact-meta, .contact-title, .contact-mail, .contact-grid")
+    .forEach((el) => el.classList.add("reveal"));
+  document.querySelectorAll("#idx > li").forEach((el, i) => { el.classList.add("reveal"); el.style.setProperty("--d", (i % 6) * 0.05 + "s"); });
   const io = new IntersectionObserver((entries) => entries.forEach((en) => {
     if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
   }), { threshold: 0.12 });
   document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+})();
+
+// Smooth scrolling with inertia, like Apple's pages: the wheel and trackpad glide and ease to a stop.
+// Touch screens keep their native scrolling, which is already smooth. Off for reduced motion.
+(() => {
+  if (!window.Lenis || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const lenis = (window.lenis = new Lenis({ lerp: 0.085, wheelMultiplier: 0.9 }));
+  const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); };
+  requestAnimationFrame(raf);
+  // in-page links glide to their section with an ease-out, landing just under the sticky header
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const id = a.getAttribute("href"), target = id === "#" ? 0 : document.querySelector(id);
+    if (target === null) return;
+    e.preventDefault();
+    lenis.scrollTo(target, { offset: target ? -document.querySelector(".top").offsetHeight : 0, duration: 1.4, easing: (x) => 1 - Math.pow(1 - x, 4) });
+  });
 })();
 
 // Light / dark toggle (remembered per visitor)
