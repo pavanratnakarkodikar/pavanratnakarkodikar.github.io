@@ -70,12 +70,14 @@
     if (!hero || !frame || !hero.offsetParent) return;
     if (innerWidth < 760) { // vertical layout: CSS places the frame; the word runs up the left edge
       frame.style.left = frame.style.width = frame.style.height = "";
-      // the word fills the space under the top row (credit | portrait)
-      const word = hero.querySelector(".pd-name .fit"), avail = hero.clientHeight - (64 + frame.offsetHeight + 28) - 16;
-      word.style.fontSize = "100px";
-      word.style.fontSize = (100 * avail) / word.scrollHeight + "px";
+      // KODIKAR stays upright, fitted to the width, then stretched tall to fill the space under the top row
+      const word = hero.querySelector(".pd-name .fit"), avail = hero.clientHeight - (64 + frame.offsetHeight + 24) - 14;
+      word.style.transform = "";
+      const h = word.getBoundingClientRect().height;
+      word.style.transform = `scaleY(${Math.max(1, avail / h).toFixed(3)})`;
       return;
     }
+    hero.querySelector(".pd-name .fit").style.transform = ""; // no stretch on wide screens
     const swap = +(hero.querySelector(".pd-name").dataset.swap || 0); // which letter the portrait replaces (1 = the O in KODIKAR)
     const letter = hero.querySelectorAll(".pd-l")[swap];
     const hr = hero.getBoundingClientRect(), lr = letter.getBoundingClientRect();
