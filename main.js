@@ -232,7 +232,8 @@
 // Touch screens keep their native scrolling, which is already smooth. Off for reduced motion.
 (() => {
   if (!window.Lenis || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  const lenis = (window.lenis = new Lenis({ lerp: 0.055, wheelMultiplier: 1 }));
+  // expo-out: the page moves the instant you scroll, then glides to a long soft stop
+  const lenis = (window.lenis = new Lenis({ duration: 1.1, easing: (t) => 1 - Math.pow(2, -10 * t), wheelMultiplier: 1 }));
   const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); };
   requestAnimationFrame(raf);
 

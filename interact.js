@@ -132,7 +132,7 @@
 
       // cursor follows with a little lag
       if (cursor) {
-        cx = lerp(cx, mx, 0.22); cy = lerp(cy, my, 0.22);
+        cx = lerp(cx, mx, 0.5); cy = lerp(cy, my, 0.5);
         cursor.style.transform = `translate(${cx}px, ${cy}px)`;
       }
     }
