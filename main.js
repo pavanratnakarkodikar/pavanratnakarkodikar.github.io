@@ -132,21 +132,21 @@
       cancelAnimationFrame(raf);
       const from = pdFrame._t || 0, dir = target > from ? 1 : -1, dist = Math.abs(target - from);
       if (still || dist < 0.001) { stretchTo(pdFrame, target); squash(1); return; }
-      const A = windUp ? 170 : 0, M = 380 + 260 * dist, S = 320;          // ms: anticipation, move, settle
-      const back = from - dir * 0.05, over = target + dir * 0.05 * dist;    // wind-up and overshoot points
+      const A = windUp ? 140 : 0, M = 400 + 260 * dist, S = 280;          // ms: anticipation, move, settle
+      const back = from - dir * 0.02, over = target + dir * 0.02 * dist;    // wind-up and overshoot points
       const start = performance.now();
       const step = (now) => {
         const e = now - start; let t, sy = 1;
         if (e < A) {                                     // anticipation: ease back a little, rising tall
-          const p = inOut(e / A); t = from + (back - from) * p; sy = 1 + 0.035 * Math.sin(Math.PI * Math.min(1, e / A * 1.4));
+          const p = inOut(e / A); t = from + (back - from) * p; sy = 1 + 0.015 * Math.sin(Math.PI * Math.min(1, e / A * 1.4));
         } else if (e < A + M) {                          // action: ease in, ease out, squash by speed
           const p = (e - A) / M, q = inOut(p), b0 = windUp ? back : from;
           t = b0 + (over - b0) * q;
           const speed = p < 0.5 ? 12 * p * p : 12 * (1 - p) * (1 - p); // derivative of the curve, peaks at 3
-          sy = 1 - 0.1 * (speed / 3) * Math.min(1, dist * 1.5);
+          sy = 1 - 0.045 * (speed / 3) * Math.min(1, dist * 1.5);
         } else if (e < A + M + S) {                      // follow through: settle from the overshoot, tall on landing
           const p = (e - A - M) / S; t = over + (target - over) * out(p);
-          sy = 1 + 0.04 * Math.sin(Math.PI * p) * (1 - p) * Math.min(1, dist * 1.5);
+          sy = 1 + 0.018 * Math.sin(Math.PI * p) * (1 - p) * Math.min(1, dist * 1.5);
         } else { stretchTo(pdFrame, target); squash(1); return; }
         stretchTo(pdFrame, t); squash(sy);
         raf = requestAnimationFrame(step);
