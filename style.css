@@ -692,8 +692,8 @@ body::before {
 .contact-foot .contact-nav { display: flex; gap: 18px; margin: 0; }
 
 /* intro photo: drag (or tap) to stretch the O open and reveal the full portrait */
-.pd-frame { cursor: grab; touch-action: pan-y; transition: left .65s cubic-bezier(.2,.8,.2,1), width .65s cubic-bezier(.2,.8,.2,1); }
-.pd-frame.is-dragging { cursor: grabbing; transition: none; }
+.pd-frame { cursor: grab; touch-action: pan-y; } /* main.js springs left/width/transform */
+.pd-frame.is-dragging { cursor: grabbing; }
 .pd-frame .pd-grid { transition: opacity .4s; }
 .pd-frame.is-open .pd-grid { opacity: .25; }
 
