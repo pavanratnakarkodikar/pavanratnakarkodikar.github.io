@@ -590,7 +590,7 @@ body::before {
 @media (max-width: 760px) {
   .hero-d { min-height: calc(100svh - 56px); }
   .pd-credit { top: 64px; left: var(--gutter); right: auto; width: 70%; }
-  .pd-credit-name { font-size: 40px; }
+  .pd-credit-name { font-size: 34px; }
   .pd-frame { animation-name: pd-in-m; }
   .pd-name { width: calc(100% - 2 * var(--gutter)); }
   .pd-side, .pd-scroll { display: none; }
