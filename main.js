@@ -3,7 +3,7 @@
   const $ = (s) => document.querySelector(s);
   const thumb = (id, q = "maxresdefault") => `https://i.ytimg.com/vi/${id}/${q}.jpg`;
   const esc = (s = "") => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-  const pad = (n) => String(n).padStart(2, "0");
+  const pad = (n, w = 2) => String(n).padStart(w, "0");
   const img = (id, eager) =>
     `<img src="${thumb(id)}" alt="" loading="${eager ? "eager" : "lazy"}" onerror="this.onerror=null;this.src='${thumb(id, "hqdefault")}'">`;
 
@@ -11,13 +11,13 @@
   const rest = data.youtube.filter((v) => !v.featured);
 
   // Featured rows
-  $("#featured-count").textContent = `(${pad(featured.length)})`;
+  $("#featured-count").textContent = pad(featured.length, 3);
   $("#featured").innerHTML = featured.map((v, i) => `
     <article class="feat reveal">
       <button class="feat-media" data-yt="${v.id}" aria-label="Play ${esc(v.title)}">
         ${img(v.id, i === 0)}
         <span class="halftone" aria-hidden="true"></span>
-        <span class="mono feat-num">${pad(i + 1)}</span>
+        <span class="num feat-num">${pad(i + 1, 3)}</span>
       </button>
       <div class="feat-info">
         <div>
@@ -35,7 +35,7 @@
   $("#idx").innerHTML = rest.map((v, i) => `
     <li>
       <button class="idx-row" data-yt="${v.id}" data-thumb="${thumb(v.id, "hqdefault")}">
-        <span class="mono">${pad(featured.length + i + 1)}</span>
+        <span class="num idx-num">${pad(featured.length + i + 1, 3)}</span>
         <span class="idx-title">${esc(v.title)}</span>
         <span class="mono idx-client">${esc(v.client)}</span>
         <span class="idx-play" aria-hidden="true">▶</span>
@@ -48,13 +48,23 @@
     <a class="reel reel--${i + 1} reveal" href="${r.url}" target="_blank" rel="noopener">
       <span class="mono reel-more">Watch on Instagram ↗</span>
       <span class="reel-img"><img src="${r.poster}" alt="${esc(r.title)}" loading="lazy"></span>
-      <span class="reel-cap mono"><b>${pad(i + 1)}/</b> ${esc(r.title)} — ${esc(r.client)}.<br>${esc(r.note || "")}</span>
+      <span class="reel-cap mono"><b class="num">${pad(i + 1, 3)}</b> ${esc(r.title)} — ${esc(r.client)}.<br>${esc(r.note || "")}</span>
     </a>`).join("");
 
   $("#tools-list").innerHTML = data.tools.map((t) =>
     `<li><a href="${t.url}" target="_blank" rel="noopener">${esc(t.name)}</a></li>`).join("");
 
   $("#year").textContent = new Date().getFullYear();
+
+  // Fit giant words (hero option B) to their container width
+  const fitAll = () => document.querySelectorAll(".fit").forEach((el) => {
+    if (!el.offsetParent) return;
+    el.style.fontSize = "100px";
+    el.style.fontSize = (100 * el.parentElement.clientWidth) / el.scrollWidth + "px";
+  });
+  fitAll();
+  document.fonts && document.fonts.ready.then(fitAll);
+  addEventListener("resize", fitAll);
 
   // Lightbox player
   const box = $("#lightbox"), player = $("#player");

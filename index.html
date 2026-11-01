@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>RK — Post Production Lead · Bengaluru</title>
+  <title>Pavan Ratnakar Kodikar — Post Production Lead · Bengaluru</title>
   <meta name="description" content="RK (Pavan) — video editor and post production lead at Unico Creative Studios, Bengaluru.">
   <meta name="theme-color" content="#f9f9f9">
   <script>
@@ -12,6 +12,8 @@
       var q = new URLSearchParams(location.search).get("theme"), t = q;
       try { t = q || localStorage.getItem("rk-theme"); } catch (e) {}
       if (t === "dark") document.documentElement.dataset.theme = "dark";
+      // hero direction preview: ?hero=a (bolt-led), b (poster stack) or c (one line)
+      var hq = new URLSearchParams(location.search).get("hero"); document.documentElement.dataset.hero = /^[abc]$/.test(hq || "") ? hq : "a";
       // pre-roll sting plays once per visit
       try {
         if (sessionStorage.getItem("rk-preroll")) document.documentElement.classList.add("no-preroll");
@@ -29,7 +31,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- Display: Kaneda Gothic Bold once web-licensed (see style.css); Anton stands in until then. Labels: IBM Plex Mono Regular. -->
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=12">
+  <link rel="stylesheet" href="style.css?v=17">
 </head>
 <body>
 
@@ -80,7 +82,26 @@
 
     <!-- HERO -->
     <section class="hero">
-      <h1 class="wordmark"><svg class="rk-mark" viewBox="0 0 1072 714" role="img" aria-label="rk."><path class="rk-r" fill="currentColor" d="M 0 197 V 714 H 142 V 481 Q 142 446 149 416 Q 156 386 172.5 363.5 Q 189 341 216 328 Q 243 315 282 315 Q 295 315 309 316.5 Q 323 318 333 320 V 188 Q 316 183 302 183 Q 275 183 250 191 Q 225 199 203 213.5 Q 181 228 164 248.5 Q 147 269 137 293 H 135 V 197 Z"/><path class="rk-k" fill="currentColor" d="M 375 0 V 714 H 517 V 536 L 572 483 L 714 714 H 886 L 669 387 L 864 197 H 696 L 517 383 V 0 Z"/><path class="rk-dot" fill="currentColor" d="M 915 560 V 714 H 1072 V 560 Z"/></svg></h1>
+      <!-- Option A: bolt-led -->
+      <div class="hero-a">
+        <svg class="hero-bolt" viewBox="0 0 536 895" role="img" aria-label="RK bolt"><path class="b-r" d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/><path class="b-f" d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/><path class="b-main" d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/></svg>
+        <h1 class="hero-name"><span>Pavan</span><span>Ratnakar</span><span>Kodikar</span></h1>
+      </div>
+
+      <!-- Option B: name-led -->
+      <div class="hero-b">
+        <h1 class="hero-name-full hero-stack"><span class="fit">Pavan</span><span class="fit">Ratnakar</span><span class="fit">Kodikar</span></h1>
+        <svg class="hero-sig" viewBox="0 0 536 895" aria-hidden="true"><path d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/></svg>
+      </div>
+
+      <!-- Option C: full name on one line -->
+      <div class="hero-c">
+        <h1 class="hero-name-full"><span class="fit">Pavan Ratnakar Kodikar</span></h1>
+        <svg class="hero-sig" viewBox="0 0 536 895" aria-hidden="true"><path d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/></svg>
+      </div>
+
+      <!-- v3 (backed up as design-v3-rk-wordmark): rk. wordmark, now reserved for the film-edit channel -->
+      <h1 class="wordmark" hidden><svg class="rk-mark" viewBox="0 0 1072 714" role="img" aria-label="rk."><path class="rk-r" fill="currentColor" d="M 0 197 V 714 H 142 V 481 Q 142 446 149 416 Q 156 386 172.5 363.5 Q 189 341 216 328 Q 243 315 282 315 Q 295 315 309 316.5 Q 323 318 333 320 V 188 Q 316 183 302 183 Q 275 183 250 191 Q 225 199 203 213.5 Q 181 228 164 248.5 Q 147 269 137 293 H 135 V 197 Z"/><path class="rk-k" fill="currentColor" d="M 375 0 V 714 H 517 V 536 L 572 483 L 714 714 H 886 L 669 387 L 864 197 H 696 L 517 383 V 0 Z"/><path class="rk-dot" fill="currentColor" d="M 915 560 V 714 H 1072 V 560 Z"/></svg></h1>
 
       <div class="hero-sub">
         <p class="lede">Video editor &amp; post production lead,<br>cutting stories at Unico Creative Studios.</p>
@@ -111,13 +132,13 @@
 
     <!-- FEATURED -->
     <section id="work" class="featured">
-      <div class="label-row"><span class="mono">Featured work</span><span class="mono" id="featured-count"></span></div>
+      <div class="label-row"><span class="mono">Featured work</span><span class="num" id="featured-count"></span></div>
       <div id="featured"></div>
     </section>
 
     <!-- INDEX -->
     <section id="index" class="index">
-      <h2 class="big-title reveal">All <span class="fade">work</span></h2>
+      <h2 class="stack-title reveal"><span class="st-sub">every cut,</span><span class="st-big">Work</span><span class="st-trail">so far.</span></h2>
       <div class="label-row mono idx-head"><span>No.</span><span>Title</span><span>Client</span><span>Watch</span></div>
       <ol class="idx" id="idx"></ol>
     </section>
@@ -125,7 +146,7 @@
     <!-- REELS (editorial) -->
     <section class="reels">
       <div class="reels-head">
-        <h2 class="cond-title reveal">REELS<br><span>&amp; SHORTS</span></h2>
+        <h2 class="stack-title reveal"><span class="st-sub">made for the scroll</span><span class="st-big">Reels</span><span class="st-trail">&amp; shorts</span></h2>
         <p class="mono reels-note">Vertical edits for brands, cafés and campaigns. Made for the scroll, cut for the feeling.</p>
       </div>
       <div class="reel-grid" id="reels"></div>
@@ -208,7 +229,7 @@
   </dialog>
 
   <script src="content.js?v=10"></script>
-  <script src="main.js?v=10"></script>
+  <script src="main.js?v=17"></script>
   <script src="interact.js?v=10"></script>
 </body>
 </html>
