@@ -704,7 +704,7 @@ body::before {
   .idx-title::after { display: none; }
   .idx-head, .idx-row { grid-template-columns: 96px minmax(0, 1fr); }
   .contact-foot .contact-nav { display: none; }
-  .pd-frame.is-open .pd-media { transform: none; }
+  .pd-frame .pd-media { transform: scale(calc(1.35 - .35 * var(--reveal, 0))); } /* face zoom eases out as it opens */
 }
 
 /* Display titles use Kaneda Gothic BOLD (the brand weight). font-synthesis stops browsers faking
@@ -746,4 +746,9 @@ body::before {
   .pd-side--l { left: .7cqw; }
   .pd-side--r { right: .7cqw; }
   .pd-cap { font-size: .68cqw; left: .6cqw; top: .5cqw; }
+}
+
+/* intro photo: the portrait settles from a slight zoom as the O opens (main.js sets --reveal 0..1) */
+@media (min-width: 761px) {
+  .pd-frame .pd-media { scale: calc(1.08 - .08 * var(--reveal, 0)); transform-origin: 44% 30%; }
 }

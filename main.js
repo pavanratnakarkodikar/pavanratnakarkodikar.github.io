@@ -118,45 +118,33 @@
   };
 
   // Drag the photo sideways to stretch the O open (either direction); release snaps it open or shut; a tap toggles.
-  // The snap is animated like a cel animator would: a small wind-up the other way (anticipation), a smooth
-  // ease in and out, a slight overshoot that settles (follow through), and the frame goes short and wide while it
-  // travels fast, then a touch tall as it lands (squash and stretch, keeping its volume).
+  // Motion in the style of Apple's interfaces: a critically damped spring (SwiftUI-style response / damping),
+  // so it accelerates and settles smoothly with almost no bounce, keeps the speed of your hand when you let go,
+  // and can be grabbed again mid-move. The portrait eases from a slight zoom to rest as it opens.
   const pdFrame = document.querySelector(".pd-frame");
   if (pdFrame) {
     const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let x0 = 0, t0 = 0, dragging = false, raf = 0, lastT = 0, vel = 0;
-    const squash = (sy) => { pdFrame.style.transform = Math.abs(sy - 1) < 0.001 ? "" : `scale(${(1 / Math.sqrt(sy)).toFixed(4)}, ${sy.toFixed(4)})`; };
-    const inOut = (p) => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
-    const out = (p) => 1 - Math.pow(1 - p, 3);
-    const animateTo = (target, windUp = true) => {
+    let x0 = 0, t0 = 0, dragging = false, raf = 0, lastT = 0, vel = 0, v = 0;
+    const response = 0.62, damping = 0.9;                                  // seconds, fraction of critical
+    const k = Math.pow((2 * Math.PI) / response, 2), c = (4 * Math.PI * damping) / response;
+    const show = (t) => { stretchTo(pdFrame, t); pdFrame.style.setProperty("--reveal", Math.min(1, Math.max(0, t)).toFixed(4)); };
+    const animateTo = (target, v0 = 0) => {
       cancelAnimationFrame(raf);
-      const from = pdFrame._t || 0, dir = target > from ? 1 : -1, dist = Math.abs(target - from);
-      if (still || dist < 0.001) { stretchTo(pdFrame, target); squash(1); return; }
-      const A = windUp ? 140 : 0, M = 400 + 260 * dist, S = 280;          // ms: anticipation, move, settle
-      const back = from - dir * 0.02, over = target + dir * 0.02 * dist;    // wind-up and overshoot points
-      const start = performance.now();
+      if (still) { show(target); return; }
+      let t = pdFrame._t || 0, prev = performance.now(); v = v0;
       const step = (now) => {
-        const e = now - start; let t, sy = 1;
-        if (e < A) {                                     // anticipation: ease back a little, rising tall
-          const p = inOut(e / A); t = from + (back - from) * p; sy = 1 + 0.015 * Math.sin(Math.PI * Math.min(1, e / A * 1.4));
-        } else if (e < A + M) {                          // action: ease in, ease out, squash by speed
-          const p = (e - A) / M, q = inOut(p), b0 = windUp ? back : from;
-          t = b0 + (over - b0) * q;
-          const speed = p < 0.5 ? 12 * p * p : 12 * (1 - p) * (1 - p); // derivative of the curve, peaks at 3
-          sy = 1 - 0.045 * (speed / 3) * Math.min(1, dist * 1.5);
-        } else if (e < A + M + S) {                      // follow through: settle from the overshoot, tall on landing
-          const p = (e - A - M) / S; t = over + (target - over) * out(p);
-          sy = 1 + 0.018 * Math.sin(Math.PI * p) * (1 - p) * Math.min(1, dist * 1.5);
-        } else { stretchTo(pdFrame, target); squash(1); return; }
-        stretchTo(pdFrame, t); squash(sy);
+        let dt = Math.min(0.05, (now - prev) / 1000); prev = now;
+        while (dt > 0) { const h = Math.min(dt, 1 / 240); v += (k * (target - t) - c * v) * h; t += v * h; dt -= h; }
+        if (Math.abs(v) < 0.005 && Math.abs(target - t) < 0.001) { v = 0; show(target); return; }
+        show(t);
         raf = requestAnimationFrame(step);
       };
       raf = requestAnimationFrame(step);
     };
-    // the entrance animation holds the frame's transform; release it once it has played so the squash can run
+    // the entrance animation holds the frame's transform; release it once it has played so it can be grabbed straight away
     pdFrame.addEventListener("animationend", () => (pdFrame.style.animation = "none"));
     pdFrame.addEventListener("pointerdown", (e) => {
-      cancelAnimationFrame(raf); squash(1);
+      cancelAnimationFrame(raf); v = 0;
       pdFrame.style.animation = "none";
       x0 = e.clientX; lastT = performance.now(); vel = 0;
       t0 = pdFrame._t || 0; dragging = false;
@@ -168,7 +156,7 @@
       if (!dragging && dx < 6) return;
       dragging = true; pdFrame.classList.add("is-dragging");
       const span = Math.max(1, pdFrame._geo.fw - pdFrame._geo.w), before = pdFrame._t || 0;
-      stretchTo(pdFrame, Math.min(1, Math.max(0, t0 + (t0 < 0.5 ? 1 : -1) * (dx * 2) / span)));
+      show(Math.min(1, Math.max(0, t0 + (t0 < 0.5 ? 1 : -1) * (dx * 2) / span)));
       const now = performance.now();
       vel = ((pdFrame._t - before) / Math.max(1, now - lastT)) * 1000; lastT = now;
     });
@@ -177,13 +165,13 @@
       if (dragging) {
         // carry the hand's momentum into the spring; a quick flick decides the direction on its own
         const t = pdFrame._t || 0;
-        animateTo(Math.abs(vel) > 1.5 ? (vel > 0 ? 1 : 0) : t > 0.5 ? 1 : 0, false); // a quick flick decides on its own
+        animateTo(Math.abs(vel) > 1.5 ? (vel > 0 ? 1 : 0) : t > 0.5 ? 1 : 0, Math.max(-8, Math.min(8, vel)));
       } else {
         animateTo(t0 > 0.5 ? 0 : 1);
       }
     };
     pdFrame.addEventListener("pointerup", release);
-    pdFrame.addEventListener("pointercancel", () => { pdFrame.classList.remove("is-dragging"); animateTo(t0, false); });
+    pdFrame.addEventListener("pointercancel", () => { pdFrame.classList.remove("is-dragging"); animateTo(t0); });
   }
 
   // Contact: LET'S TALK fitted to the width, then stretched tall like the phone intro
