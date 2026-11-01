@@ -15,7 +15,7 @@ window.PORTFOLIO = {
     { id: "PzUnxnk6Dio", title: "White Gold × Kerala Blasters FC", subtitle: "White Gold", client: "White Gold",
       tags: ["Brand film", "Sports", "Edit"], featured: true },
     { id: "ieNHyExbpOo", title: "Best Exercise to Release Pledged Gold", subtitle: "White Gold", client: "White Gold",
-      tags: ["Brand film", "Edit"], featured: true },
+      tags: ["TVC", "Edit"], featured: true },
     { id: "LYQg1dbE0rc", title: "Path to Glory", subtitle: "Ajna Amit — India's youngest MMA champion", client: "Documentary",
       tags: ["Documentary", "Edit"], featured: true },
     { id: "w7jDm6ndg0E", title: "Firefly Journey", subtitle: "Anand Audio", client: "Anand Audio",
