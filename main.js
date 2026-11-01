@@ -56,16 +56,6 @@
 
   $("#year").textContent = new Date().getFullYear();
 
-  // Fit giant words to their container width
-  const fitAll = () => document.querySelectorAll(".fit").forEach((el) => {
-    el.style.fontSize = "100px";
-    const w = el.parentElement.clientWidth;
-    el.style.fontSize = (100 * w) / el.scrollWidth + "px";
-  });
-  fitAll();
-  document.fonts && document.fonts.ready.then(fitAll);
-  addEventListener("resize", fitAll);
-
   // Lightbox player
   const box = $("#lightbox"), player = $("#player");
   document.addEventListener("click", (e) => {

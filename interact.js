@@ -21,12 +21,6 @@
     return `00:${pad(Math.floor(f / 1440) % 60)}:${pad(Math.floor(f / 24) % 60)}:${pad(f % 24)}`;
   };
 
-  // ── Wordmark: split into letters that "melt" (Climate Crisis YEAR axis) ──
-  const word = $(".wordmark .fit");
-  const text = word.textContent;
-  word.innerHTML = [...text].map((c) => `<span class="wl">${c}</span>`).join("");
-  const letters = $$(".wl").map((el) => ({ el, year: 1979 }));
-
   // ── Ticker: driven by JS so scroll speed & direction push it ──
   const track = $(".ticker-track");
   document.documentElement.classList.add("js-ticker");
@@ -108,7 +102,6 @@
 
   // ── Frame loop ───────────────────────────────────────────
   let lastY = scrollY, lastT = performance.now(), vel = 0;
-  const heroH = () => $(".hero").offsetHeight;
 
   const loop = (t) => {
     const dt = Math.min(64, t - lastT); lastT = t;
@@ -124,19 +117,6 @@
     tcEl.textContent = timecode(p);
 
     if (!calm) {
-      // wordmark melts as you scroll past it; letters near the cursor melt more
-      const base = 1979 + clamp(y / (heroH() * 0.6), 0, 1) * 45;
-      letters.forEach((L) => {
-        let target = base;
-        if (fine) {
-          const r = L.el.getBoundingClientRect();
-          const d = Math.hypot(mx - (r.left + r.width / 2), my - (r.top + r.height / 2)) / r.width;
-          target = Math.max(target, 1979 + clamp(1 - d, 0, 1) * 55);
-        }
-        L.year = lerp(L.year, target, 0.12);
-        L.el.style.fontVariationSettings = `"YEAR" ${L.year.toFixed(1)}`;
-      });
-
       // hero film grows to full width as it scrolls into view
       const fr = film.getBoundingClientRect();
       const q = clamp((innerHeight - fr.top) / innerHeight, 0, 1);

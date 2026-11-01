@@ -12,17 +12,36 @@
       var q = new URLSearchParams(location.search).get("theme"), t = q;
       try { t = q || localStorage.getItem("rk-theme"); } catch (e) {}
       if (t === "dark") document.documentElement.dataset.theme = "dark";
+      // pre-roll sting plays once per visit
+      try {
+        if (sessionStorage.getItem("rk-preroll")) document.documentElement.classList.add("no-preroll");
+        else sessionStorage.setItem("rk-preroll", "1");
+      } catch (e) {}
     })();
   </script>
   <meta property="og:title" content="RK — Post Production Lead">
   <meta property="og:description" content="Video editing, colour and post production. Bengaluru.">
-  <meta property="og:image" content="assets/reel-amudham.jpg">
+  <meta property="og:image" content="https://pavanratnakarkodikar.github.io/assets/og-image.png">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Climate+Crisis:YEAR@1979..2050&family=Archivo:wdth,wght@62..125,400..900&family=Inter+Tight:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=9">
+  <!-- Display: Kaneda Gothic Bold once web-licensed (see style.css); Anton stands in until then. Labels: IBM Plex Mono Regular. -->
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=12">
 </head>
 <body>
+
+  <!-- pre-roll sting: a red light streak hits the bolt, RGB split, lock. Once per visit. -->
+  <div class="preroll" id="preroll" aria-hidden="true">
+    <span class="pr-streak"></span>
+    <svg class="pr-bolt" viewBox="-40 -20 616 935">
+      <path class="pr-r" d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/>
+      <path class="pr-f" d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/>
+      <path class="pr-w" d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/>
+    </svg>
+  </div>
 
   <!-- side rails (desktop) -->
   <aside class="rail rail--left" aria-hidden="true">
@@ -40,7 +59,9 @@
 
   <!-- top bar -->
   <header class="top">
-    <a href="#" class="mark" aria-label="RK home">RK<sup>®</sup></a>
+    <a href="#" class="mark" aria-label="RK home">
+      <svg class="bolt" viewBox="0 0 536 895" aria-hidden="true"><path class="b-r" d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/><path class="b-f" d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/><path class="b-main" d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/></svg>
+    </a>
     <nav class="top-nav">
       <a href="#work">Work</a>
       <a href="#index">Index</a>
@@ -59,7 +80,7 @@
 
     <!-- HERO -->
     <section class="hero">
-      <h1 class="wordmark" aria-label="RK"><span class="fit">RK</span></h1>
+      <h1 class="wordmark"><svg class="rk-mark" viewBox="0 0 1072 714" role="img" aria-label="rk."><path class="rk-r" fill="currentColor" d="M 0 197 V 714 H 142 V 481 Q 142 446 149 416 Q 156 386 172.5 363.5 Q 189 341 216 328 Q 243 315 282 315 Q 295 315 309 316.5 Q 323 318 333 320 V 188 Q 316 183 302 183 Q 275 183 250 191 Q 225 199 203 213.5 Q 181 228 164 248.5 Q 147 269 137 293 H 135 V 197 Z"/><path class="rk-k" fill="currentColor" d="M 375 0 V 714 H 517 V 536 L 572 483 L 714 714 H 886 L 669 387 L 864 197 H 696 L 517 383 V 0 Z"/><path class="rk-dot" fill="currentColor" d="M 915 560 V 714 H 1072 V 560 Z"/></svg></h1>
 
       <div class="hero-sub">
         <p class="lede">Video editor &amp; post production lead,<br>cutting stories at Unico Creative Studios.</p>
@@ -165,7 +186,7 @@
       <div class="label-row mono">
         <span>Explore</span>
         <span class="contact-nav"><a href="#work">Work</a><a href="#index">Index</a><a href="#about">Info</a><a href="#contact">Contact</a></span>
-        <span class="mark mark--sm">RK<sup>®</sup></span>
+        <svg class="bolt bolt--sm" viewBox="0 0 536 895" aria-hidden="true"><path class="b-main" d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/></svg>
       </div>
       <a class="contact-mail" href="mailto:thegradedframes@gmail.com">thegradedframes@gmail.com<span class="arrow">↗</span></a>
       <div class="contact-grid mono">
@@ -186,8 +207,8 @@
     <div class="lightbox-player" id="player"></div>
   </dialog>
 
-  <script src="content.js?v=9"></script>
-  <script src="main.js?v=9"></script>
-  <script src="interact.js?v=9"></script>
+  <script src="content.js?v=10"></script>
+  <script src="main.js?v=10"></script>
+  <script src="interact.js?v=10"></script>
 </body>
 </html>
