@@ -2,7 +2,7 @@
 //  EDIT YOUR PORTFOLIO HERE
 //  Add / remove / reorder items and refresh the page.
 //  YouTube: paste just the video ID (the part after youtu.be/).
-//  featured: true  → shown as a big row at the top (keep 3–4).
+//  featured: true  → shown as a big row at the top (currently 5).
 //  Everything else appears in the "All work" index.
 // ─────────────────────────────────────────────────────────────
 
@@ -18,7 +18,7 @@ window.PORTFOLIO = {
       tags: ["Documentary", "Edit", "Colour"], featured: true },
     { id: "ieNHyExbpOo", title: "Best Exercise to Release Pledged Gold", client: "White Gold" },
     { id: "w7jDm6ndg0E", title: "Firefly Journey", subtitle: "Anand Audio", client: "Anand Audio",
-      tags: ["Music", "Edit"] },
+      tags: ["Music", "Edit"], featured: true },
     { id: "CS9MJSOZXL8", title: "Gold of Karnataka Ep. 1", client: "White Gold CSR" },
     { id: "7SvRv_55cA0", title: "The Joy of Fatherhood", client: "White Gold Money" },
     { id: "UOndBAOxrqE", title: "Don't Hold Your Dreams Back", client: "White Gold" },
