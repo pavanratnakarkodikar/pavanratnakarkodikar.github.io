@@ -20,6 +20,7 @@ window.PORTFOLIO = {
       tags: ["Documentary", "Edit"], featured: true },
     { id: "w7jDm6ndg0E", title: "Firefly Journey", subtitle: "Anand Audio", client: "Anand Audio",
       tags: ["Music", "Edit"] },
+    { id: "dWlFInODuJA", title: "Firefly Theme Lyrical", client: "Anand Audio" },
     { id: "CS9MJSOZXL8", title: "Gold of Karnataka Ep. 1", client: "White Gold CSR" },
     { id: "7SvRv_55cA0", title: "The Joy of Fatherhood", client: "White Gold Money" },
     { id: "UOndBAOxrqE", title: "Don't Hold Your Dreams Back", client: "White Gold" },
