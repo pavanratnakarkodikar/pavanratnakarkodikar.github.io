@@ -77,28 +77,39 @@
     const hero = document.querySelector(".pd-board"), frame = document.querySelector(".pd-frame");
     if (!hero || !frame || !hero.offsetParent) return;
     const phone = innerWidth < 760;
-    // KODIKAR is fitted to the width, then stretched up (from its baseline) to meet the name strip.
-    // Everything is measured from layout boxes (offsetTop/Left), which transforms and the entrance
-    // animation don't affect, so the result is the same whenever this runs.
+    // KODIKAR is fitted to the width, then stretched so its LETTERS run from just under the name strip
+    // to the bottom of the artboard. We measure the actual glyph outlines (via canvas text metrics),
+    // not the line box, so it's right with Kaneda Gothic or the Anton fallback (Brave, and any visitor
+    // without Kaneda, sees Anton, whose letters sit differently in the line box). Layout boxes
+    // (offsetTop) are used for positions, so the entrance animation can't skew anything.
     const word = hero.querySelector(".pd-name .fit"), credit = hero.querySelector(".pd-credit"), name = hero.querySelector(".pd-name");
     word.style.transform = "";
     const top = credit.offsetTop + credit.offsetHeight + (phone ? 22 : hero.clientWidth * 0.022); // gap scales with the artboard
-    const wordBox = () => ({ t: name.offsetTop + word.offsetTop, h: word.offsetHeight });
-    let wb = wordBox();
-    // short windows: the width-fitted word is already taller than the space under the strip, so shrink it to fit
-    if (wb.t + wb.h - top < wb.h) {
-      word.style.fontSize = parseFloat(word.style.fontSize) * ((wb.t + wb.h - top) / wb.h) * 0.99 + "px";
-      wb = wordBox();
+    const floor = hero.clientHeight - (phone ? 14 : 0);                                              // where the letters end
+    const glyphs = () => {
+      const cs = getComputedStyle(word), ctx = (placeFrame.ctx ||= document.createElement("canvas").getContext("2d"));
+      ctx.font = `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+      const t = ctx.measureText(word.textContent), lh = word.offsetHeight;
+      const base = (lh - (t.fontBoundingBoxAscent + t.fontBoundingBoxDescent)) / 2 + t.fontBoundingBoxAscent; // baseline inside the line box
+      const boxTop = name.offsetTop + word.offsetTop;
+      return { top: boxTop + base - t.actualBoundingBoxAscent, bottom: boxTop + base + t.actualBoundingBoxDescent, inBoxBottom: base + t.actualBoundingBoxDescent };
+    };
+    let gl = glyphs();
+    // short windows: the width-fitted letters are already taller than the room, so shrink the word to fit
+    if (gl.bottom - gl.top > floor - top) {
+      word.style.fontSize = parseFloat(word.style.fontSize) * ((floor - top) / (gl.bottom - gl.top)) * 0.99 + "px";
+      gl = glyphs();
     }
-    const bottom = wb.t + wb.h, s = Math.max(1, (bottom - top) / wb.h);
-    word.style.transform = `scaleY(${s.toFixed(3)})`;
-    // the portrait takes the O's place at the stretched size (scaleY from the bottom edge)
+    const s = Math.max(1, (floor - top) / (gl.bottom - gl.top));
+    // stretch from the letters' bottom edge, and move that edge onto the floor
+    word.style.transformOrigin = `50% ${gl.inBoxBottom}px`;
+    word.style.transform = `translateY(${(floor - gl.bottom).toFixed(1)}px) scaleY(${s.toFixed(3)})`;
+    // the portrait fills the O: same letter height, the O's own width
     const oEl = hero.querySelectorAll(".pd-l")[+(name.dataset.swap || 0)];
     const oLeft = name.offsetLeft + word.offsetLeft + oEl.offsetLeft, oW = oEl.offsetWidth;
-    const oTop = bottom - (bottom - (wb.t + oEl.offsetTop)) * s, oH = oEl.offsetHeight * s;
     const p = oW * (phone ? 0.12 : 0.06);
-    const l = oLeft - p, w = oW + p * 2, h = oH;
-    frame.style.top = oTop + "px";
+    const l = oLeft - p, w = oW + p * 2, h = floor - top;
+    frame.style.top = top + "px";
     frame.style.height = h + "px";
     const fw = Math.max(w, Math.min(h * 0.8, hero.clientWidth - 32));
     const fl = Math.min(Math.max(l + w / 2 - fw / 2, 16), hero.clientWidth - 16 - fw);
