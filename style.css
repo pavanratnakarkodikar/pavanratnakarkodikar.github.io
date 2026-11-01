@@ -123,10 +123,10 @@ section { scroll-margin-top: 64px; }
 .duo-media { filter: grayscale(1) contrast(1.15) brightness(1.05); }
 .duo-tint { position: absolute; inset: 0; z-index: 1; background: var(--red); mix-blend-mode: screen; pointer-events: none; }
 .halftone {
-  position: absolute; inset: 0; z-index: 2; pointer-events: none; mix-blend-mode: multiply; opacity: .55;
+  position: absolute; inset: 0; z-index: 2; pointer-events: none; mix-blend-mode: multiply; opacity: .32;
   background: radial-gradient(circle at center, rgba(0,0,0,.55) 0 1px, transparent 1.6px) 0 0 / 4px 4px;
 }
-.halftone--dense { background-size: 3px 3px; opacity: .45; }
+.halftone--dense { background-size: 3px 3px; opacity: .28; }
 
 /* ── ticker ────────────────────────────── */
 .ticker {
@@ -461,9 +461,9 @@ html.has-cursor [data-cursor] * { cursor: none; }
 /* ── halftone paper: a barely-there print screen over the whole page ── */
 body::before {
   content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background: radial-gradient(circle, rgba(12, 12, 12, .07) 0 .7px, transparent 1.1px) 0 0 / 5px 5px;
+  background: radial-gradient(circle, rgba(12, 12, 12, .045) 0 .7px, transparent 1.1px) 0 0 / 5px 5px;
 }
-:root[data-theme="dark"] body::before { background-image: radial-gradient(circle, rgba(249, 249, 249, .05) 0 .7px, transparent 1.1px); }
+:root[data-theme="dark"] body::before { background-image: radial-gradient(circle, rgba(249, 249, 249, .03) 0 .7px, transparent 1.1px); }
 .wrap { position: relative; z-index: 1; }
 @media print { body::before { display: none; } }
 
@@ -544,7 +544,7 @@ body::before {
   isolation: isolate;
 }
 .hero-d::before { /* print dot screen */
-  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; mix-blend-mode: multiply; opacity: .5;
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; mix-blend-mode: multiply; opacity: .28;
   background: radial-gradient(circle, rgba(0, 0, 0, .22) 0 .8px, transparent 1.2px) 0 0 / 5px 5px;
 }
 .pd-meta, .pd-credit, .pd-side, .pd-scroll { position: absolute; z-index: 3; }
@@ -569,7 +569,7 @@ body::before {
   animation: pd-in 1.2s cubic-bezier(.2,.8,.2,1) both .35s;
 }
 .pd-media { width: 100%; height: 100%; object-fit: cover; object-position: 44% 0%; display: block; filter: grayscale(1) contrast(1.3) brightness(1.02); }
-.pd-halftone { position: absolute; inset: 0; mix-blend-mode: multiply; opacity: .55; background: radial-gradient(circle, rgba(0,0,0,.6) 0 1px, transparent 1.5px) 0 0 / 4px 4px; }
+.pd-halftone { position: absolute; inset: 0; mix-blend-mode: multiply; opacity: .32; background: radial-gradient(circle, rgba(0,0,0,.6) 0 1px, transparent 1.5px) 0 0 / 4px 4px; }
 .pd-grid { /* viewfinder grid: 3 x 4 in brand red */
   position: absolute; inset: 0; pointer-events: none;
   background:
