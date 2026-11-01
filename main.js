@@ -221,7 +221,7 @@
   // Reveal on scroll: titles and blocks glide up as they enter; rows in a list follow each other a beat apart
   document.querySelectorAll(".sec-title, .label-row, .about-copy, .about-facts, .profile, .contact-meta, .contact-title, .contact-mail, .contact-grid")
     .forEach((el) => el.classList.add("reveal"));
-  document.querySelectorAll("#idx > li").forEach((el, i) => { el.classList.add("reveal"); el.style.setProperty("--d", (i % 6) * 0.05 + "s"); });
+  document.querySelectorAll("#idx > li").forEach((el, i) => { el.classList.add("reveal"); el.style.setProperty("--d", (i % 6) * 0.03 + "s"); });
   const io = new IntersectionObserver((entries) => entries.forEach((en) => {
     if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
   }), { threshold: 0.12 });
@@ -259,6 +259,14 @@
     v = 0; lastWheel = performance.now();
     if (!loop) loop = requestAnimationFrame(settle);
   }, { passive: true });
+  // the top bar slides away while you scroll down and comes back as soon as you scroll up
+  const top = document.querySelector(".top");
+  let lastY = 0;
+  lenis.on("scroll", ({ scroll }) => {
+    if (Math.abs(scroll - lastY) < 6) return;
+    top.classList.toggle("is-hidden", scroll > lastY && scroll > 160);
+    lastY = scroll;
+  });
   // in-page links glide to their section with an ease-out, landing just under the sticky header
   document.addEventListener("click", (e) => {
     const a = e.target.closest('a[href^="#"]');
