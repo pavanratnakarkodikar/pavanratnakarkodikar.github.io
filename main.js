@@ -75,25 +75,19 @@
   const placeFrame = () => {
     const hero = document.querySelector(".hero-d"), frame = document.querySelector(".pd-frame");
     if (!hero || !frame || !hero.offsetParent) return;
-    const word = hero.querySelector(".pd-name .fit");
-    const letterOf = () => hero.querySelectorAll(".pd-l")[+(hero.querySelector(".pd-name").dataset.swap || 0)]; // 1 = the O in KODIKAR
-    let l, w, h;
-    if (innerWidth < 760) {
-      // phones: KODIKAR upright, fitted to the width, then stretched to fill everything under the credit block
-      const credit = hero.querySelector(".pd-credit");
-      const top = credit.getBoundingClientRect().bottom - hero.getBoundingClientRect().top + 22;
-      word.style.transform = "";
-      word.style.transform = `scaleY(${Math.max(1, (hero.clientHeight - top - 14) / word.getBoundingClientRect().height).toFixed(3)})`;
-      const hr = hero.getBoundingClientRect(), o = letterOf().getBoundingClientRect(), p = o.width * 0.12;
-      l = o.left - hr.left - p; w = o.width + p * 2; h = o.height;
-      frame.style.top = o.top - hr.top + "px";
-    } else {
-      word.style.transform = ""; // no stretch on wide screens
-      frame.style.top = "";
-      const hr = hero.getBoundingClientRect(), lr = letterOf().getBoundingClientRect(), p = lr.width * 0.06;
-      // height from the word's layout box (not its on-screen rect, which the entrance animation is still moving)
-      l = lr.left - hr.left - p; w = lr.width + p * 2; h = Math.min(hr.height * 0.86, word.offsetHeight * 1.27);
-    }
+    const phone = innerWidth < 760;
+    // KODIKAR is fitted to the width, then stretched up (from its baseline) to meet the name strip
+    const word = hero.querySelector(".pd-name .fit"), credit = hero.querySelector(".pd-credit");
+    word.style.transform = "";
+    const hr = hero.getBoundingClientRect(), wr = word.getBoundingClientRect();
+    const top = credit.getBoundingClientRect().bottom - hr.top + (phone ? 22 : 30);
+    const wordTop = wr.top - hr.top, wordBottom = wr.bottom - hr.top;
+    word.style.transform = `scaleY(${Math.max(1, (wordBottom - top) / (wordBottom - wordTop)).toFixed(3)})`;
+    // the portrait takes the O's place at the stretched size
+    const o = hero.querySelectorAll(".pd-l")[+(hero.querySelector(".pd-name").dataset.swap || 0)].getBoundingClientRect();
+    const p = o.width * (phone ? 0.12 : 0.06);
+    const l = o.left - hr.left - p, w = o.width + p * 2, h = o.height;
+    frame.style.top = o.top - hr.top + "px";
     frame.style.height = h + "px";
     const fw = Math.max(w, Math.min(h * 0.8, hero.clientWidth - 32));
     const fl = Math.min(Math.max(l + w / 2 - fw / 2, 16), hero.clientWidth - 16 - fw);
@@ -138,6 +132,9 @@
   const layout = () => { fitAll(); placeFrame(); stretchContact(); };
   layout();
   document.fonts && document.fonts.ready.then(layout);
+  // the word rises in on load; measure again once it has landed
+  const pdName = document.querySelector(".pd-name");
+  if (pdName) pdName.addEventListener("animationend", layout);
   addEventListener("resize", layout);
 
   // Lightbox player

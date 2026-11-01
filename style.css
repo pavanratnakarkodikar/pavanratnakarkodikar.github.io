@@ -560,7 +560,7 @@ body::before {
 .pd-side--r { right: max(10px, calc(var(--rail) / 2 - 6px)); transform: translateY(-50%); }
 .pd-scroll { left: calc(var(--rail) + var(--gutter)); top: 46%; font-weight: 700; letter-spacing: -.04em; font-size: 15px; color: #0c0c0c; }
 
-.pd-name { position: absolute; z-index: 1; left: calc(var(--rail) + var(--gutter)); width: min(calc(100% - 2 * (var(--rail) + var(--gutter))), 128svh); bottom: -.06em; margin: 0; line-height: .78; overflow: visible; }
+.pd-name { position: absolute; z-index: 1; left: calc(var(--rail) + var(--gutter)); width: calc(100% - 2 * (var(--rail) + var(--gutter))); bottom: -.06em; margin: 0; line-height: .78; overflow: visible; }
 .pd-name .fit { display: inline-block; white-space: nowrap; font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: -.005em; color: #0c0c0c; }
 
 .pd-frame {
@@ -585,7 +585,7 @@ body::before {
   100% { opacity: 1; transform: none; filter: none; }
 }
 .pd-frame:hover { filter: drop-shadow(-8px 0 rgba(255,45,45,.95)) drop-shadow(8px 0 rgba(249,249,249,.7)); transition: filter .25s; }
-.pd-name .fit { animation: rise 1.1s cubic-bezier(.2,.8,.2,1) both .2s; }
+.pd-name { animation: rise 1.1s cubic-bezier(.2,.8,.2,1) both .2s; }
 
 @media (max-width: 760px) {
   /* vertical phones: name + bio across the top; KODIKAR upright and stretched to fill the rest,
@@ -712,4 +712,19 @@ body::before {
 .sec-title, .big-title, .cond-title, .hero-name, .hero-name-full .fit, .pd-name .fit, .about-title,
 .contact-title .fit, .ticker-track, .stamp-num, .poster-title, .poster-name {
   font-weight: 700; font-synthesis: none;
+}
+
+/* ── desktop tweaks: no side rails, readable edge labels, name strip on top, KODIKAR stretched ── */
+:root { --rail: 0px; }
+.rail { display: none; }
+.pd-side { font-size: 12px; letter-spacing: .06em; font-weight: 500; color: #0c0c0c; }
+@media (min-width: 761px) {
+  .pd-meta--tl, .pd-scroll { display: none; }
+  .pd-credit {
+    top: clamp(20px, 2.4vw, 36px); left: var(--gutter); right: var(--gutter); width: auto;
+    display: grid; grid-template-columns: auto minmax(0, 46ch); justify-content: space-between; align-items: end; gap: 32px;
+  }
+  .pd-credit-name { font-size: clamp(30px, 2.8vw, 48px); }
+  .pd-credit-line { margin: 0; text-align: right; font-size: clamp(15px, 1.2vw, 19px); }
+  .pd-name .fit { transform-origin: 50% 100%; }
 }
