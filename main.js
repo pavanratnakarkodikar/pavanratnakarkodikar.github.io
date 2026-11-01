@@ -232,9 +232,32 @@
 // Touch screens keep their native scrolling, which is already smooth. Off for reduced motion.
 (() => {
   if (!window.Lenis || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  const lenis = (window.lenis = new Lenis({ lerp: 0.085, wheelMultiplier: 0.9 }));
+  const lenis = (window.lenis = new Lenis({ lerp: 0.055, wheelMultiplier: 1 }));
   const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); };
   requestAnimationFrame(raf);
+
+  // Rubber band at the very top and bottom: scrolling past the edge pulls the page a little (with growing
+  // resistance), and it springs back once you stop, like iOS / macOS.
+  const page = document.querySelector("main"), MAX = 60;
+  let x = 0, v = 0, lastWheel = 0, loop = 0;
+  const draw = () => (page.style.transform = Math.abs(x) < 0.3 ? "" : `translate3d(0, ${x.toFixed(2)}px, 0)`);
+  const settle = (now) => {
+    if (now - lastWheel > 90) {                                   // hand off: spring back, no overshoot
+      const k = 170, c = 26; v += (-k * x - c * v) / 60; x += v / 60;
+    }
+    draw();
+    if (Math.abs(x) < 0.3 && Math.abs(v) < 0.3 && now - lastWheel > 90) { x = v = 0; draw(); loop = 0; return; }
+    loop = requestAnimationFrame(settle);
+  };
+  addEventListener("wheel", (e) => {
+    const atTop = scrollY <= 0, atBottom = scrollY >= document.documentElement.scrollHeight - innerHeight - 1;
+    const d = e.deltaY;
+    if (!((atTop && d < 0) || (atBottom && d > 0) || x !== 0)) return;
+    if ((x > 0 && d > 0) || (x < 0 && d < 0)) { x -= d * 0.5; if (Math.sign(x) !== Math.sign(x + d * 0.5)) x = 0; } // pushing back in
+    else x += -d * 0.3 * (1 - Math.min(1, Math.abs(x) / MAX));                                                     // pulling out, harder near MAX
+    v = 0; lastWheel = performance.now();
+    if (!loop) loop = requestAnimationFrame(settle);
+  }, { passive: true });
   // in-page links glide to their section with an ease-out, landing just under the sticky header
   document.addEventListener("click", (e) => {
     const a = e.target.closest('a[href^="#"]');
