@@ -810,3 +810,15 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; } /* Lenis d
   .idx-type { display: none; }
   .idx-client[data-type]:not([data-type=""])::before { content: attr(data-type) " · "; }
 }
+
+/* Reels: an even contact sheet. Same-size 9:16 posters on one top line, four per row, captions in the
+   same place under each. The 1M+ group sits first with its view count on the poster. */
+.reel-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(16px, 2vw, 28px); row-gap: clamp(32px, 4vw, 56px); }
+.reel { grid-column: auto; margin-top: 0; }
+.reels-label { margin-bottom: 18px; }
+.reel-grid--top { margin-bottom: clamp(56px, 7vw, 104px); }
+.reel-img { position: relative; }
+.reel-views { position: absolute; left: 10px; bottom: 10px; z-index: 2; padding: 5px 8px; background: var(--red); color: var(--white); font-size: 12px; letter-spacing: .02em; }
+.reel-cap { display: flex; flex-direction: column; gap: 3px; max-width: none; font-size: 14px; line-height: 1.2; }
+.reel-cap b { font-size: 17px; letter-spacing: -.03em; }
+.reel-client { font-weight: 700; letter-spacing: -.02em; }

@@ -43,13 +43,15 @@
       </button>
     </li>`).join("");
 
-  // Reels — editorial stagger
-  $("#reels").innerHTML = data.reels.map((r, i) => `
-    <a class="reel reel--${i + 1} reveal" href="${r.url}" target="_blank" rel="noopener">
-      <span class="mono reel-more">Watch on Instagram ↗</span>
-      <span class="reel-img"><img src="${r.poster}" alt="${esc(r.title)}" loading="lazy"></span>
-      <span class="reel-cap mono"><b>${esc(r.title)}</b> — ${esc(r.client)}.<br>${esc(r.note || "")}</span>
-    </a>`).join("");
+  // Reels: the 1M+ view reels in their own row, the rest in an even grid below
+  const reelCard = (r) => `
+    <a class="reel reveal" href="${r.url}" target="_blank" rel="noopener">
+      <span class="reel-img"><img src="${r.poster}" alt="${esc(r.title)}" loading="lazy">${r.top ? `<span class="reel-views mono">▶ ${esc(r.views)} views</span>` : ""}</span>
+      <span class="reel-cap"><b>${esc(r.title)}</b><span class="reel-client">${esc(r.client)}</span>${esc(r.note || "")}</span>
+    </a>`;
+  $("#reels-top").innerHTML = data.reels.filter((r) => r.top).map(reelCard).join("");
+  $("#reels").innerHTML = data.reels.filter((r) => !r.top).map(reelCard).join("");
+  $("#reels-top-count").textContent = `${data.reels.filter((r) => r.top).length} reels past a million views`;
 
   $("#tools-list").innerHTML = data.tools.map((t) =>
     `<li><a href="${t.url}" target="_blank" rel="noopener">${esc(t.name)}</a></li>`).join("");
