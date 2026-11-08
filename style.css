@@ -955,7 +955,10 @@ a[href^="tel"], a[x-apple-data-detectors] { color: inherit !important; text-deco
   .about2-facts dd { white-space: normal; }
   /* phones: a smaller RK tucked into the bottom-right corner (over the shoulder, clear of the face),
      and the location label moved to the top-left */
-  .about2-photo { height: 440px; }
-  .about2-rk { font-size: 64vw; right: -.03em; bottom: -.22em; }
+  .about2-photo { height: 640px; }
+  .about2-photo img { object-position: 42% 12%; }
+  /* RK spans the full width along the bottom and runs off the edge (like KODIKAR in the intro):
+     the face stays in the top half, the letters rise over the chest */
+  .about2-rk { left: 0; right: 0; text-align: center; font-size: 150vw; bottom: -.24em; letter-spacing: -.01em; }
   .about2-loc { top: 12px; bottom: auto; }
 }
