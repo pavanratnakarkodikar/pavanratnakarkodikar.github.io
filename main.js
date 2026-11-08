@@ -51,7 +51,6 @@
     </a>`;
   $("#reels-top").innerHTML = data.reels.filter((r) => r.top).map(reelCard).join("");
   $("#reels").innerHTML = data.reels.filter((r) => !r.top).map(reelCard).join("");
-  $("#reels-top-count").textContent = `${data.reels.filter((r) => r.top).length} reels past a million views`;
 
   $("#tools-list").innerHTML = data.tools.map((t) =>
     `<li><a href="${t.url}" target="_blank" rel="noopener">${esc(t.name)}</a></li>`).join("");
@@ -232,7 +231,7 @@
   }
 
   // Reveal on scroll: titles and blocks glide up as they enter; rows in a list follow each other a beat apart
-  document.querySelectorAll(".sec-title, .label-row, .about-copy, .about-facts, .profile, .contact-meta, .contact-title, .contact-mail, .contact-grid")
+  document.querySelectorAll(".sec-title, .label-row, .about-copy, .contact-title, .contact-mail, .contact-grid")
     .forEach((el) => el.classList.add("reveal"));
   document.querySelectorAll("#idx > li").forEach((el, i) => { el.classList.add("reveal"); el.style.setProperty("--d", (i % 6) * 0.03 + "s"); });
   const io = new IntersectionObserver((entries) => entries.forEach((en) => {

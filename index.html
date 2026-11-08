@@ -12,8 +12,7 @@
       var q = new URLSearchParams(location.search).get("theme"), t = q;
       try { t = q || localStorage.getItem("rk-theme"); } catch (e) {}
       if (t === "dark") document.documentElement.dataset.theme = "dark";
-      // hero direction preview: ?hero=d (poster, default), a (bolt-led), b (stack) or c (one line)
-      var hq = new URLSearchParams(location.search).get("hero"); document.documentElement.dataset.hero = /^[abcd]$/.test(hq || "") ? hq : "d";
+      document.documentElement.dataset.hero = "d"; // the poster intro
       // pre-roll sting plays once per visit
       try {
         if (sessionStorage.getItem("rk-preroll")) document.documentElement.classList.add("no-preroll");
@@ -72,7 +71,6 @@
       <div class="hero-d" id="hero-d">
         <!-- the artboard: one fixed composition that scales as a whole (16:9 on laptops/monitors) -->
         <div class="pd-board">
-          <div class="pd-meta pd-meta--tl"><span>portfolio — 2026</span><span>post production &amp; edit</span></div>
           <div class="pd-credit">
             <p class="pd-credit-name">Pavan<br>Ratnakar<br>Kodikar</p>
             <div class="pd-credit-r">
@@ -94,48 +92,18 @@
       </div>
       <div class="ht-edge ht-edge--out" aria-hidden="true"></div>
 
-      <!-- Option A: bolt-led -->
-      <div class="hero-a">
-        <svg class="hero-bolt" viewBox="0 0 536 895" role="img" aria-label="RK bolt"><path class="b-r" d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/><path class="b-f" d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/><path class="b-main" d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/></svg>
-        <h1 class="hero-name"><span>Pavan</span><span>Ratnakar</span><span>Kodikar</span></h1>
-      </div>
-
-      <!-- Option B: name-led -->
-      <div class="hero-b">
-        <h1 class="hero-name-full hero-stack"><span class="fit">Pavan</span><span class="fit">Ratnakar</span><span class="fit">Kodikar</span></h1>
-        <svg class="hero-sig" viewBox="0 0 536 895" aria-hidden="true"><path d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/></svg>
-      </div>
-
-      <!-- Option C: full name on one line -->
-      <div class="hero-c">
-        <h1 class="hero-name-full"><span class="fit">Pavan Ratnakar Kodikar</span></h1>
-        <svg class="hero-sig" viewBox="0 0 536 895" aria-hidden="true"><path d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/></svg>
-      </div>
-
-      <!-- v3 (backed up as design-v3-rk-wordmark): rk. wordmark, now reserved for the film-edit channel -->
-      <h1 class="wordmark" hidden><svg class="rk-mark" viewBox="0 0 1072 714" role="img" aria-label="rk."><path class="rk-r" fill="currentColor" d="M 0 197 V 714 H 142 V 481 Q 142 446 149 416 Q 156 386 172.5 363.5 Q 189 341 216 328 Q 243 315 282 315 Q 295 315 309 316.5 Q 323 318 333 320 V 188 Q 316 183 302 183 Q 275 183 250 191 Q 225 199 203 213.5 Q 181 228 164 248.5 Q 147 269 137 293 H 135 V 197 Z"/><path class="rk-k" fill="currentColor" d="M 375 0 V 714 H 517 V 536 L 572 483 L 714 714 H 886 L 669 387 L 864 197 H 696 L 517 383 V 0 Z"/><path class="rk-dot" fill="currentColor" d="M 915 560 V 714 H 1072 V 560 Z"/></svg></h1>
-
-      <div class="hero-sub">
-        <p class="lede">Video editor &amp; post production lead,<br>cutting stories at Unico Creative Studios.</p>
-        <ul class="mono hero-meta">
-          <li>Bengaluru, IN</li>
-          <li>12.97° N — 77.59° E</li>
-          <li><span class="dot"></span> Available for projects</li>
-        </ul>
-      </div>
 
       <div class="hero-film">
         <video id="hero-video" class="duo-media" src="assets/hero.mp4?v=3" autoplay muted loop playsinline></video>
         <span class="duo-tint" aria-hidden="true"></span>
         <span class="halftone" aria-hidden="true"></span>
-        <span class="mono film-tag film-tag--tr">FILM ▌▌▌▌</span>
       </div>
     </section>
 
     <!-- FEATURED -->
     <section id="work" class="featured">
       <h2 class="sec-title reveal">Selected work</h2>
-      <div class="label-row"><span>Featured</span><span>Trailers · Brand films · Documentaries</span></div>
+      <div class="label-row"><span>Trailers · Brand films · Documentaries</span></div>
       <div id="featured"></div>
     </section>
 
@@ -152,9 +120,9 @@
         <h2 class="sec-title reveal">Reels &amp; shorts</h2>
         <p class="reels-note">Vertical edits for brands, cafés and campaigns. Made for the scroll, cut for the feeling.</p>
       </div>
-      <div class="label-row reels-label"><span>1M+ views</span><span id="reels-top-count"></span></div>
+      <div class="label-row reels-label"><span>1M+ views</span></div>
       <div class="reel-grid reel-grid--top" id="reels-top"></div>
-      <div class="label-row reels-label"><span>More reels</span><span>Brands, cafés &amp; campaigns</span></div>
+      <div class="label-row reels-label"><span>More reels</span></div>
       <div class="reel-grid" id="reels"></div>
     </section>
 
@@ -168,7 +136,6 @@
           <figcaption class="mono pd-cap">CAM B · Profile</figcaption>
         </figure>
         <div class="about-copy">
-          <div class="about-meta"><span>about</span></div>
           <h2 class="sec-title about-credits-title reveal">Credits</h2>
           <dl class="credits reveal">
             <div><dt>Edited by</dt><dd>Pavan Ratnakar Kodikar</dd></div>
@@ -188,13 +155,11 @@
 
     <!-- CONTACT: ink poster -->
     <section id="contact" class="contact ink-field">
-      <div class="contact-meta"><span>contact</span></div>
       <h2 class="contact-title"><span class="fit">Let's talk</span></h2>
       <a class="contact-mail" href="mailto:thegradedframes@gmail.com">thegradedframes@gmail.com<span class="arrow">↗</span></a>
       <div class="contact-grid">
         <a href="https://www.instagram.com/rk.pavan_" target="_blank" rel="noopener">Instagram ↗</a>
         <a href="tel:+919148458938">+91 91484 58938</a>
-        <span>Bengaluru, India</span>
         <span>© <span id="year"></span> Pavan Ratnakar Kodikar</span>
       </div>
       <div class="contact-foot">
@@ -214,7 +179,7 @@
 
   <script src="content.js?v=26"></script>
   <script src="assets/vendor/lenis.min.js"></script>
-  <script src="main.js?v=85"></script>
+  <script src="main.js?v=86"></script>
   <script src="interact.js?v=12"></script>
 </body>
 </html>
