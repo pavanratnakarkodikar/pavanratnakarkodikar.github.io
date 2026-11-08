@@ -886,3 +886,15 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; } /* Lenis d
   .top .pill { display: inline-flex; padding: 6px 12px; font-size: 13px; }
   .top-nav { gap: 14px; }
 }
+
+/* top bar: three columns so Work · Index · Info sits at the true centre of the page,
+   whatever the widths of the logo (left) and the toggle + Let's talk (right) */
+.top { display: grid; grid-template-columns: 1fr auto 1fr; }
+.top .mark { justify-self: start; }
+.top .top-end { justify-self: end; }
+/* phones: the right-hand buttons are too wide for true page centre, so the menu centres in the space
+   between the logo and the buttons (equal gaps either side) */
+@media (max-width: 760px) {
+  .top { grid-template-columns: auto 1fr auto; }
+  .top .top-nav { justify-self: center; }
+}
