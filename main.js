@@ -192,8 +192,10 @@
     if (!ct) return;
     ct.style.transform = "";
     const h0 = ct.getBoundingClientRect().height;
-    ct.style.transform = "scaleY(1.7)";
-    ct.parentElement.style.height = h0 * 1.7 + "px";
+    // stretched tall, but capped so LET'S TALK plus the contact links fit on one screen
+    const s = Math.max(1, Math.min(1.7, (innerHeight * (innerWidth < 760 ? 0.42 : 0.48)) / h0));
+    ct.style.transform = `scaleY(${s.toFixed(3)})`;
+    ct.parentElement.style.height = h0 * s + "px";
   };
 
   const layout = () => { fitAll(); placeFrame(); stretchContact(); };

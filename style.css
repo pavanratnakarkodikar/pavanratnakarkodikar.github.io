@@ -848,3 +848,21 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; } /* Lenis d
   .credits-line { margin-left: 0; }
   .proof { grid-template-columns: 1fr 1fr; row-gap: 28px; }
 }
+
+/* Contact: a closing card that fits one screen. LET'S TALK, one line on what you're open for, then three
+   clear ways to reach you, and a slim footer */
+.contact-lede { margin: clamp(20px, 2.4vw, 36px) 0 0; max-width: 40ch; color: var(--white); font-weight: 700; letter-spacing: -.04em; line-height: 1.1; font-size: clamp(18px, 1.6vw, 24px); }
+.contact-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 24px); margin-top: clamp(24px, 3vw, 44px); }
+.contact-links a { display: flex; flex-direction: column; gap: 10px; padding: 16px 0 0; border-top: 1px solid rgba(249, 249, 249, .3); color: var(--white); transition: border-color .2s var(--ease), color .2s var(--ease); }
+.contact-links a .mono { font-size: 12px; color: rgba(249, 249, 249, .7); }
+.contact-links a b { font-weight: 700; letter-spacing: -.04em; line-height: 1.05; font-size: clamp(18px, 1.7vw, 28px); overflow-wrap: anywhere; }
+.contact-links a i { font-style: normal; color: var(--red); }
+.contact-links a:hover { border-top-color: var(--red); color: var(--red); }
+.contact-foot { justify-content: space-between; color: rgba(249, 249, 249, .7); font-size: 14px; }
+.contact-foot .to-top { color: var(--white); }
+.contact-foot .to-top:hover { color: var(--red); }
+@media (max-width: 760px) {
+  .contact-links { grid-template-columns: 1fr; gap: 0; }
+  .contact-links a { padding: 14px 0; }
+  .contact-foot { flex-wrap: wrap; gap: 12px; font-size: 13px; }
+}
