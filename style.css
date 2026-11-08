@@ -962,3 +962,9 @@ a[href^="tel"], a[x-apple-data-detectors] { color: inherit !important; text-deco
   .about2-rk { left: 0; right: 0; text-align: center; font-size: 150vw; bottom: -.24em; letter-spacing: -.01em; }
   .about2-loc { top: 12px; bottom: auto; }
 }
+
+/* photo first (RK as the section's title card), then the red block, whose halftone edge leads into Contact */
+.about2 { margin-top: calc(var(--edge) + 24px); }
+.about2-top.red-field { margin-top: 0; }
+.about2-top.red-field::before { display: none; }
+.about2-top.red-field::after { display: block; }

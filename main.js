@@ -62,7 +62,7 @@
   const short = (n) => n >= 1e6 ? Math.floor(n / 1e5) / 10 + "M" : Math.floor(n / 1e3) + "K";
   $("#proof").innerHTML = [
     ["4+", "years editing"],
-    ["60+", "videos edited"],
+    ["90+", "videos edited"],
     [short(reelViews) + "+", "views on reels"],
   ].map(([n, l]) => `<div><b>${n}</b><span class="mono">${l}</span></div>`).join("");
 
