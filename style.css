@@ -898,3 +898,7 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; } /* Lenis d
   .top { grid-template-columns: auto 1fr auto; }
   .top .top-nav { justify-self: center; }
 }
+
+/* KODIKAR's box trimmed to exactly cap height and baseline, so the portrait frame matches the letters */
+@supports (text-box: trim-both cap alphabetic) { .pd-name .fit { text-box: trim-both cap alphabetic; } }
+.pd-name.is-swapped .pd-l:nth-child(2) { visibility: hidden; }

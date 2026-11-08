@@ -93,11 +93,18 @@
     // not the line box, so it's right with Kaneda Gothic or the Anton fallback (Brave, and any visitor
     // without Kaneda, sees Anton, whose letters sit differently in the line box). Layout boxes
     // (offsetTop) are used for positions, so the entrance animation can't skew anything.
+    const trimmed = CSS.supports("text-box", "trim-both cap alphabetic");
     const word = hero.querySelector(".pd-name .fit"), credit = hero.querySelector(".pd-credit"), name = hero.querySelector(".pd-name");
     word.style.transform = "";
     const top = credit.offsetTop + credit.offsetHeight + (phone ? 22 : hero.clientWidth * 0.022); // gap scales with the artboard
     const floor = hero.clientHeight - (phone ? 14 : 0);                                              // where the letters end
     const glyphs = () => {
+      // where supported, CSS trims the word's box to exactly cap height and baseline (text-box), so its
+      // layout box IS the letters: exact with any font. Otherwise fall back to canvas text metrics.
+      if (trimmed) {
+        const boxTop = name.offsetTop + word.offsetTop;
+        return { top: boxTop, bottom: boxTop + word.offsetHeight, inBoxBottom: word.offsetHeight };
+      }
       const cs = getComputedStyle(word), ctx = (placeFrame.ctx ||= document.createElement("canvas").getContext("2d"));
       ctx.font = `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
       const t = ctx.measureText(word.textContent), lh = word.offsetHeight;
@@ -153,7 +160,11 @@
       raf = requestAnimationFrame(step);
     };
     // the entrance animation holds the frame's transform; release it once it has played so it can be grabbed straight away
-    pdFrame.addEventListener("animationend", () => (pdFrame.style.animation = "none"));
+    // once the photo has landed it stands in for the O, so hide the letter (its round top overshoots the
+    // flat letters and would peek above the frame)
+    const swapIn = () => document.querySelector(".pd-name").classList.add("is-swapped");
+    pdFrame.addEventListener("animationend", () => { pdFrame.style.animation = "none"; swapIn(); });
+    setTimeout(swapIn, 2500); // in case the entrance animation doesn't run
     pdFrame.addEventListener("pointerdown", (e) => {
       cancelAnimationFrame(raf); v = 0;
       pdFrame.style.animation = "none";
