@@ -901,4 +901,6 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; } /* Lenis d
 
 /* KODIKAR's box trimmed to exactly cap height and baseline, so the portrait frame matches the letters */
 @supports (text-box: trim-both cap alphabetic) { .pd-name .fit { text-box: trim-both cap alphabetic; } }
+/* the portrait stands in for the O from the start: the word rises with an empty slot and the photo streaks in
+   to fill it (the round O overshoots the flat letters, so showing then hiding it read as a pop) */
 .pd-name.is-swapped .pd-l:nth-child(2) { visibility: hidden; }

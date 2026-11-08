@@ -160,11 +160,7 @@
       raf = requestAnimationFrame(step);
     };
     // the entrance animation holds the frame's transform; release it once it has played so it can be grabbed straight away
-    // once the photo has landed it stands in for the O, so hide the letter (its round top overshoots the
-    // flat letters and would peek above the frame)
-    const swapIn = () => document.querySelector(".pd-name").classList.add("is-swapped");
-    pdFrame.addEventListener("animationend", () => { pdFrame.style.animation = "none"; swapIn(); });
-    setTimeout(swapIn, 2500); // in case the entrance animation doesn't run
+    pdFrame.addEventListener("animationend", () => (pdFrame.style.animation = "none"));
     pdFrame.addEventListener("pointerdown", (e) => {
       cancelAnimationFrame(raf); v = 0;
       pdFrame.style.animation = "none";
