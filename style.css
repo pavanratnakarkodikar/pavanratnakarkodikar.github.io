@@ -89,8 +89,12 @@ section { scroll-margin-top: 64px; }
   border: 1px solid var(--red); border-radius: 999px; padding: 5px 14px; font-size: 12px; font-weight: 500;
   transition: background .2s, color .2s;
 }
-.pill:hover, .pill--solid { background: var(--red); color: var(--white); }
-.pill--solid:hover { background: transparent; color: var(--red); }
+.pill--solid { background: var(--red); color: var(--white); }
+/* hover colours only where there is a real hover (mouse/trackpad), so a tap on a phone never leaves a button stuck */
+@media (hover: hover) {
+  .pill:hover { background: var(--red); color: var(--white); }
+  .pill--solid:hover { background: transparent; color: var(--red); }
+}
 
 /* ── hero ──────────────────────────────── */
 .hero { padding-top: clamp(8px, 2vw, 24px); }
@@ -909,3 +913,12 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; } /* Lenis d
 .feat-foot { flex-direction: column; align-items: flex-start; justify-content: flex-end; gap: 14px; }
 .feat-foot .work-meta { align-self: stretch; }
 .work-meta > span { white-space: nowrap; }
+
+/* phones: no grey tap flash on links and buttons */
+a, button { -webkit-tap-highlight-color: transparent; }
+
+/* Same look on every device: no browser-default button styling (iOS Safari), no automatic text inflation
+   when a phone is turned sideways, and inherited colours for any link the OS might create */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+button { -webkit-appearance: none; appearance: none; }
+a[href^="tel"], a[x-apple-data-detectors] { color: inherit !important; text-decoration: none !important; }

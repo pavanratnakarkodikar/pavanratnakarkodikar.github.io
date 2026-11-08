@@ -38,7 +38,7 @@
 
     $$(".feat-media").forEach((el) => (el.dataset.cursor = "Play"));
     $$(".idx-row").forEach((el) => (el.dataset.cursor = "Play"));
-    $$(".reel").forEach((el) => (el.dataset.cursor = "Watch ↗"));
+    $$(".reel").forEach((el) => (el.dataset.cursor = "Watch ↗︎"));
 
     document.addEventListener("pointerover", (e) => {
       const t = e.target.closest("[data-cursor]");

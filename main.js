@@ -25,7 +25,7 @@
         </div>
         <div class="feat-foot">
           <span class="work-meta"><span>${esc(v.type)}</span> · <span>${esc(v.client)}</span></span>
-          <button class="pill pill--solid" data-yt="${v.id}">Play ▶</button>
+          <button class="pill pill--solid" data-yt="${v.id}">Play ▶︎</button>
         </div>
       </div>
     </article>`).join("");
@@ -38,7 +38,7 @@
         <span class="idx-title">${esc(v.title)}</span>
         <span class="idx-type">${esc(v.type || "")}</span>
         <span class="mono idx-client" data-type="${esc(v.type || "")}">${esc(v.client)}</span>
-        <span class="idx-play" aria-hidden="true">▶</span>
+        <span class="idx-play" aria-hidden="true">▶︎</span>
         <img class="idx-thumb" src="${thumb(v.id, "mqdefault")}" alt="" loading="lazy">
       </button>
     </li>`).join("");
@@ -46,7 +46,7 @@
   // Reels: the 1M+ view reels in their own row, the rest in an even grid below
   const reelCard = (r) => `
     <a class="reel reveal" href="${r.url}" target="_blank" rel="noopener">
-      <span class="reel-img"><img src="${r.poster}" alt="${esc(r.title)}" loading="lazy">${r.top ? `<span class="reel-views mono">▶ ${esc(r.views)} views</span>` : ""}</span>
+      <span class="reel-img"><img src="${r.poster}" alt="${esc(r.title)}" loading="lazy">${r.top ? `<span class="reel-views mono">▶︎ ${esc(r.views)} views</span>` : ""}</span>
       <span class="reel-cap"><b>${esc(r.title)}</b>${r.note ? `<span class="reel-note">${esc(r.note)}</span>` : ""}<span class="work-meta">${esc(r.client)}</span></span>
     </a>`;
   $("#reels-top").innerHTML = data.reels.filter((r) => r.top).map(reelCard).join("");
