@@ -90,24 +90,31 @@
     const phone = innerWidth < 760;
     // KODIKAR is fitted to the width, then stretched so its LETTERS run from just under the name strip
     // to the bottom of the artboard. We measure the actual glyph outlines (via canvas text metrics),
-    // not the line box, so it's right with Kaneda Gothic or the Anton fallback (Brave, and any visitor
-    // without Kaneda, sees Anton, whose letters sit differently in the line box). Layout boxes
+    // not the line box, so it's right with Kaneda Gothic or a fallback font. Layout boxes
     // (offsetTop) are used for positions, so the entrance animation can't skew anything.
-    const trimmed = CSS.supports("text-box", "trim-both cap alphabetic");
     const word = hero.querySelector(".pd-name .fit"), credit = hero.querySelector(".pd-credit"), name = hero.querySelector(".pd-name");
     word.style.transform = "";
+    // Measure the letters with canvas text metrics when the canvas sees the same font as the page (checked by
+    // comparing widths letter by letter): true for the Adobe Fonts web font every visitor gets. When it doesn't
+    // (e.g. a locally installed copy shadowing it), trim the word's box to cap height and baseline with CSS
+    // text-box instead, so the box itself is the letters.
+    const ctx = (placeFrame.ctx ||= document.createElement("canvas").getContext("2d"));
+    const cs0 = getComputedStyle(word);
+    ctx.font = `${cs0.fontWeight} ${cs0.fontSize} ${cs0.fontFamily}`;
+    const ls = parseFloat(cs0.letterSpacing) || 0;
+    const canvasW = [...word.querySelectorAll(".pd-l")].reduce((s, l) => s + ctx.measureText(l.textContent.toUpperCase()).width + ls, 0);
+    const trimmed = Math.abs(canvasW / word.scrollWidth - 1) > 0.02 && CSS.supports("text-box", "trim-both cap alphabetic");
+    word.classList.toggle("trim", trimmed);
     const top = credit.offsetTop + credit.offsetHeight + (phone ? 22 : hero.clientWidth * 0.022); // gap scales with the artboard
     const floor = hero.clientHeight - (phone ? 14 : 0);                                              // where the letters end
     const glyphs = () => {
-      // where supported, CSS trims the word's box to exactly cap height and baseline (text-box), so its
-      // layout box IS the letters: exact with any font. Otherwise fall back to canvas text metrics.
-      if (trimmed) {
+      if (trimmed) { // the trimmed box is exactly the letters
         const boxTop = name.offsetTop + word.offsetTop;
         return { top: boxTop, bottom: boxTop + word.offsetHeight, inBoxBottom: word.offsetHeight };
       }
-      const cs = getComputedStyle(word), ctx = (placeFrame.ctx ||= document.createElement("canvas").getContext("2d"));
+      const cs = getComputedStyle(word);
       ctx.font = `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
-      const t = ctx.measureText(word.textContent), lh = word.offsetHeight;
+      const t = ctx.measureText("H"), lh = word.offsetHeight; // a flat capital: exactly the cap height of K, D, I, A, R (the round O overshoots it)
       const base = (lh - (t.fontBoundingBoxAscent + t.fontBoundingBoxDescent)) / 2 + t.fontBoundingBoxAscent; // baseline inside the line box
       const boxTop = name.offsetTop + word.offsetTop;
       return { top: boxTop + base - t.actualBoundingBoxAscent, bottom: boxTop + base + t.actualBoundingBoxDescent, inBoxBottom: base + t.actualBoundingBoxDescent };

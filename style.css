@@ -7,10 +7,10 @@
   --red-soft: rgba(217, 0, 0, .55);
   --red-line: rgba(217, 0, 0, .35);
   /* Brand fonts: Kaneda Gothic Bold (display), Helvetica Neue (text), IBM Plex Mono Regular (labels).
-     Kaneda isn't web-licensed yet: Anton stands in. Once licensed, add its @font-face and it takes over. */
-  --display: "Kaneda Gothic", "Anton", Impact, "Arial Narrow", sans-serif;
-  --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+     All three are served to every visitor from Adobe Fonts (index.html); the rest are fallbacks if it can't load. */
+  --display: "kaneda-gothic", "Kaneda Gothic", Impact, "Arial Narrow", sans-serif;
+  --sans: "helvetica-neue-lt-pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --mono: "ibm-plex-mono", "IBM Plex Mono", ui-monospace, Menlo, monospace;
   /* tight & bold: Helvetica Neue Bold at -6% tracking, 88% leading (from the film-edit title cards) */
   --track: -.06em;
   --lead: .88;
@@ -708,7 +708,7 @@ body::before {
 }
 
 /* Display titles use Kaneda Gothic BOLD (the brand weight). font-synthesis stops browsers faking
-   a bold on the Anton stand-in, which is already heavy. */
+   a bold on a fallback font. */
 .sec-title, .big-title, .cond-title, .hero-name, .hero-name-full .fit, .pd-name .fit, .about-title,
 .contact-title .fit, .ticker-track, .stamp-num, .poster-title, .poster-name {
   font-weight: 700; font-synthesis: none;
@@ -900,6 +900,6 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; } /* Lenis d
 }
 
 /* KODIKAR's box trimmed to exactly cap height and baseline, so the portrait frame matches the letters */
-@supports (text-box: trim-both cap alphabetic) { .pd-name .fit { text-box: trim-both cap alphabetic; } }
+@supports (text-box: trim-both cap alphabetic) { .pd-name .fit.trim { text-box: trim-both cap alphabetic; } }
 /* once the photo has wiped over it (main.js), the portrait stands in for the O */
 .pd-name.is-swapped .pd-l:nth-child(2) { visibility: hidden; }
