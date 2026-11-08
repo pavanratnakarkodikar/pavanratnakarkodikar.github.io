@@ -24,7 +24,7 @@
           ${v.subtitle ? `<p>${esc(v.subtitle)}</p>` : ""}
         </div>
         <div class="feat-foot">
-          <span class="work-meta">${esc(v.type)} · ${esc(v.client)}</span>
+          <span class="work-meta"><span>${esc(v.type)}</span> · <span>${esc(v.client)}</span></span>
           <button class="pill pill--solid" data-yt="${v.id}">Play ▶</button>
         </div>
       </div>

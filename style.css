@@ -903,3 +903,9 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; } /* Lenis d
 @supports (text-box: trim-both cap alphabetic) { .pd-name .fit.trim { text-box: trim-both cap alphabetic; } }
 /* once the photo has wiped over it (main.js), the portrait stands in for the O */
 .pd-name.is-swapped .pd-l:nth-child(2) { visibility: hidden; }
+
+/* Selected work rows: Type · Client gets the column's full width with Play underneath; if it wraps, it
+   breaks at the dot, never inside a name */
+.feat-foot { flex-direction: column; align-items: flex-start; justify-content: flex-end; gap: 14px; }
+.feat-foot .work-meta { align-self: stretch; }
+.work-meta > span { white-space: nowrap; }
