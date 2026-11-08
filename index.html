@@ -31,7 +31,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- Display: Kaneda Gothic Bold once web-licensed (see style.css); Anton stands in until then. Labels: IBM Plex Mono Regular. -->
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=95">
+  <link rel="stylesheet" href="style.css?v=97">
 </head>
 <body>
 
@@ -169,17 +169,21 @@
         </figure>
         <div class="about-copy">
           <div class="about-meta"><span>about</span></div>
-          <h2 class="about-title reveal">Post<br>production</h2>
-          <p class="about-lede">Tired of edits that just sit there? I'm Pavan, post production lead at Unico Creative Studios. I cut trailers, brand films, documentaries and reels that move with rhythm and feel cut on purpose.</p>
-          <p class="about-body">From the first assembly to the final cut, I handle story, pace and sound, in English, Kannada and Hindi.</p>
-          <dl class="about-facts">
-            <div><dt>Based in</dt><dd>Bengaluru, IN</dd></div>
-            <div><dt>Role</dt><dd>Post production lead</dd></div>
+          <h2 class="sec-title about-credits-title reveal">Credits</h2>
+          <dl class="credits reveal">
+            <div><dt>Edited by</dt><dd>Pavan Ratnakar Kodikar</dd></div>
+            <div><dt>Position</dt><dd>Post Production Lead</dd></div>
             <div><dt>Studio</dt><dd>Unico Creative Studios</dd></div>
-            <div><dt>Toolkit</dt><dd><ul id="tools-list"></ul></dd></div>
+            <div><dt>Cuts</dt><dd>Trailers · Brand films · TVCs · Documentaries · Reels</dd></div>
+            <div><dt>Languages</dt><dd>English · Kannada · Hindi</dd></div>
+            <div><dt>Tools</dt><dd><ul id="tools-list" class="credits-tools"></ul></dd></div>
+            <div><dt>Based in</dt><dd>Bengaluru, India</dd></div>
           </dl>
+          <p class="credits-line">Tired of edits that just sit there? I cut for rhythm, so every frame earns its place.</p>
         </div>
       </div>
+      <!-- the final card: real numbers from the work above (filled in by main.js) -->
+      <div class="proof reveal" id="proof"></div>
     </section>
 
     <!-- CONTACT: ink poster -->
@@ -195,7 +199,6 @@
       </div>
       <div class="contact-foot">
         <svg class="bolt bolt--sm" viewBox="0 0 536 895" aria-hidden="true"><path class="b-main" d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/></svg>
-        <span class="contact-nav"><a href="#work">Work</a><a href="#index">Index</a><a href="#about">Info</a><a href="#contact">Contact</a></span>
       </div>
     </section>
   </main>
@@ -211,7 +214,7 @@
 
   <script src="content.js?v=26"></script>
   <script src="assets/vendor/lenis.min.js"></script>
-  <script src="main.js?v=84"></script>
+  <script src="main.js?v=85"></script>
   <script src="interact.js?v=12"></script>
 </body>
 </html>

@@ -56,6 +56,16 @@
   $("#tools-list").innerHTML = data.tools.map((t) =>
     `<li><a href="${t.url}" target="_blank" rel="noopener">${esc(t.name)}</a></li>`).join("");
 
+  // About: the closing proof card, counted from the work lists so it stays true as work is added
+  const views = (v) => parseFloat(v) * (/M/i.test(v) ? 1e6 : /K/i.test(v) ? 1e3 : 1);
+  const topReel = data.reels.filter((r) => r.views).sort((a, b) => views(b.views) - views(a.views))[0];
+  $("#proof").innerHTML = [
+    [topReel ? topReel.views : "", "views on the top reel"],
+    [data.reels.filter((r) => r.views && views(r.views) >= 1e6).length, "reels past a million views"],
+    [data.youtube.length, "films edited"],
+    [3, "languages: English, Kannada, Hindi"],
+  ].map(([n, l]) => `<div><b>${n}</b><span class="mono">${l}</span></div>`).join("");
+
   $("#year").textContent = new Date().getFullYear();
 
   // Fit giant words (hero option B) to their container width
