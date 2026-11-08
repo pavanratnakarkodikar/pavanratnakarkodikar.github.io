@@ -62,7 +62,7 @@
     [topReel ? topReel.views : "", "views on the top reel"],
     [data.reels.filter((r) => r.views && views(r.views) >= 1e6).length, "reels past a million views"],
     [data.youtube.length, "films edited"],
-    [3, "languages: English, Kannada, Hindi"],
+    [3, "languages"],
   ].map(([n, l]) => `<div><b>${n}</b><span class="mono">${l}</span></div>`).join("");
 
 

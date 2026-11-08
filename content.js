@@ -50,7 +50,7 @@ window.PORTFOLIO = {
       note: "For nights when your mind feels heavy: a drive, an honest talk, coffee at 1 am.",
       url: "https://www.instagram.com/reel/DaQWJsnSOkI/" },
     { poster: "assets/reel-diamonds.jpg", title: "Diamonds That Take You Places", client: "Crash.club",
-      note: "A beautiful diamond and a beautiful escape to Goa.",
+      note: "Some diamonds don't just shine, they take you places.",
       url: "https://www.instagram.com/reel/DadDALKz2yn/" },
     { poster: "assets/reel-gocolors-linen.jpg", title: "Indian Summer", client: "Go Colors",
       note: "No rules. Just linen, lace, and wherever the board takes her.",
