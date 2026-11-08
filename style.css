@@ -870,3 +870,13 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; } /* Lenis d
 /* footer sign-off: the bolt with © RK, Back to top on the right */
 .foot-sign { display: inline-flex; align-items: center; gap: 10px; }
 .contact-foot .foot-sign .bolt--sm { height: 20px; }
+
+/* One text hierarchy for every piece of work (featured rows, the list, reels):
+   1 title: bold, ink · 2 descriptor (optional): bold, red · 3 Type · Client: small, bold, muted */
+.reel-cap b, :root[data-theme="dark"] .reel-cap b { color: var(--ink); }
+.reel-note, .feat-info p { color: var(--red); font-weight: 700; letter-spacing: -.03em; }
+.reel-note { font-size: 14px; line-height: 1.2; }
+.work-meta, .idx-type, .idx-client { font-family: var(--sans); font-size: 14px; font-weight: 700; letter-spacing: -.03em; text-transform: none; opacity: .7; }
+.reel-cap .work-meta { margin-top: 2px; }
+.feat-foot .work-meta { align-self: end; }
+:root[data-theme="dark"] .reel-note, :root[data-theme="dark"] .feat-info p { color: var(--red-fine); }

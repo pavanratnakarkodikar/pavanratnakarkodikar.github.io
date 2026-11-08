@@ -21,10 +21,10 @@
       <div class="feat-info">
         <div>
           <h3>${esc(v.title)}</h3>
-          <p>${esc(v.subtitle || v.client)}</p>
+          ${v.subtitle ? `<p>${esc(v.subtitle)}</p>` : ""}
         </div>
         <div class="feat-foot">
-          <ul class="mono">${(v.tags || []).map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
+          <span class="work-meta">${esc(v.type)} · ${esc(v.client)}</span>
           <button class="pill pill--solid" data-yt="${v.id}">Play ▶</button>
         </div>
       </div>
@@ -47,7 +47,7 @@
   const reelCard = (r) => `
     <a class="reel reveal" href="${r.url}" target="_blank" rel="noopener">
       <span class="reel-img"><img src="${r.poster}" alt="${esc(r.title)}" loading="lazy">${r.top ? `<span class="reel-views mono">▶ ${esc(r.views)} views</span>` : ""}</span>
-      <span class="reel-cap"><b>${esc(r.title)}</b><span class="reel-client">${esc(r.client)}</span>${esc(r.note || "")}</span>
+      <span class="reel-cap"><b>${esc(r.title)}</b>${r.note ? `<span class="reel-note">${esc(r.note)}</span>` : ""}<span class="work-meta">${esc(r.client)}</span></span>
     </a>`;
   $("#reels-top").innerHTML = data.reels.filter((r) => r.top).map(reelCard).join("");
   $("#reels").innerHTML = data.reels.filter((r) => !r.top).map(reelCard).join("");
