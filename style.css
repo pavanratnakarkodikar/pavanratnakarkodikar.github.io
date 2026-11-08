@@ -880,3 +880,9 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; } /* Lenis d
 .reel-cap .work-meta { margin-top: 2px; }
 .feat-foot .work-meta { align-self: end; }
 :root[data-theme="dark"] .reel-note, :root[data-theme="dark"] .feat-info p { color: var(--red-fine); }
+
+/* phones: with Contact gone from the menu, the Let's talk button is the way to reach the Contact section */
+@media (max-width: 760px) {
+  .top .pill { display: inline-flex; padding: 6px 12px; font-size: 13px; }
+  .top-nav { gap: 14px; }
+}
