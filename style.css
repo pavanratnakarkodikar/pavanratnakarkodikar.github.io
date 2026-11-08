@@ -866,3 +866,7 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; } /* Lenis d
   .contact-links a { padding: 14px 0; }
   .contact-foot { flex-wrap: wrap; gap: 12px; font-size: 13px; }
 }
+
+/* footer sign-off: the bolt with © RK, Back to top on the right */
+.foot-sign { display: inline-flex; align-items: center; gap: 10px; }
+.contact-foot .foot-sign .bolt--sm { height: 20px; }

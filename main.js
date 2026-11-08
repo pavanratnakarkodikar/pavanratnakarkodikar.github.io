@@ -65,7 +65,6 @@
     [3, "languages: English, Kannada, Hindi"],
   ].map(([n, l]) => `<div><b>${n}</b><span class="mono">${l}</span></div>`).join("");
 
-  $("#year").textContent = new Date().getFullYear();
 
   // Fit giant words (hero option B) to their container width
   const fitAll = () => document.querySelectorAll(".fit").forEach((el) => {
