@@ -160,10 +160,29 @@
       raf = requestAnimationFrame(step);
     };
     // the entrance animation holds the frame's transform; release it once it has played so it can be grabbed straight away
-    pdFrame.addEventListener("animationend", () => (pdFrame.style.animation = "none"));
+    // The O is wiped away exactly behind the photo's leading edge as it slides in: every frame, the part
+    // of the O the photo has passed over is clipped off, so the O never pops (its round top overshoots
+    // the flat letters, so it can't just sit behind the frame). Once the photo has landed it stands in for the O.
+    const pdNameEl = document.querySelector(".pd-name");
+    const oLetter = document.querySelectorAll(".pd-l")[+(pdNameEl.dataset.swap || 0)];
+    let swapped = false;
+    const swapIn = () => {
+      if (swapped) return;
+      swapped = true; oLetter.style.clipPath = ""; pdNameEl.classList.add("is-swapped");
+    };
+    const wipe = () => {
+      if (swapped || !oLetter) return;
+      const f = pdFrame.getBoundingClientRect(), o = oLetter.getBoundingClientRect();
+      const cut = Math.min(o.width, Math.max(0, f.right - o.left));
+      oLetter.style.clipPath = `inset(-50% 0 -50% ${cut.toFixed(1)}px)`;
+      requestAnimationFrame(wipe);
+    };
+    if (oLetter) requestAnimationFrame(wipe);
+    pdFrame.addEventListener("animationend", () => { pdFrame.style.animation = "none"; swapIn(); });
+    setTimeout(swapIn, 2600); // no entrance animation (reduced motion): swap anyway
     pdFrame.addEventListener("pointerdown", (e) => {
       cancelAnimationFrame(raf); v = 0;
-      pdFrame.style.animation = "none";
+      pdFrame.style.animation = "none"; swapIn();
       x0 = e.clientX; lastT = performance.now(); vel = 0;
       t0 = pdFrame._t || 0; dragging = false;
       pdFrame.setPointerCapture(e.pointerId);
