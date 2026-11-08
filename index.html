@@ -32,7 +32,7 @@
        Kaneda Gothic Bold (display), Helvetica Neue Bold (text), IBM Plex Mono Regular (labels) -->
   <link rel="preconnect" href="https://use.typekit.net" crossorigin>
   <link rel="stylesheet" href="https://use.typekit.net/ran2ila.css">
-  <link rel="stylesheet" href="style.css?v=113">
+  <link rel="stylesheet" href="style.css?v=116">
 </head>
 <body>
 
@@ -128,30 +128,31 @@
     </section>
 
     <!-- ABOUT: red poster with the profile portrait -->
-    <section id="about" class="about red-field">
-      <div class="about-grid">
-        <figure class="about-frame reveal">
-          <img src="assets/portrait-profile.jpg" alt="Pavan Ratnakar Kodikar in profile" width="1040" height="1300" loading="lazy">
-          <span class="pd-halftone"></span>
-          <span class="pd-grid"></span>
-          <figcaption class="mono pd-cap">CAM B · Profile</figcaption>
-        </figure>
-        <div class="about-copy">
-          <h2 class="sec-title about-credits-title reveal">Credits</h2>
-          <dl class="credits reveal">
-            <div><dt>Edited by</dt><dd>Pavan Ratnakar Kodikar</dd></div>
-            <div><dt>Position</dt><dd>Post production lead</dd></div>
-            <div><dt>Studio</dt><dd>Unico Creative Studios</dd></div>
-            <div><dt>Cuts</dt><dd>Trailers · Brand films · TVCs · Documentaries · Reels</dd></div>
-            <div><dt>Languages</dt><dd>English · Kannada · Hindi</dd></div>
-            <div><dt>Tools</dt><dd><ul id="tools-list" class="credits-tools"></ul></dd></div>
-            <div><dt>Based in</dt><dd>Bengaluru, India</dd></div>
-          </dl>
-          <p class="credits-line">Rhythm first. The rest follows.</p>
+    <section id="about" class="about2">
+      <div class="about2-top red-field">
+        <div class="about2-story">
+          <h2 class="sec-title about2-title reveal">The editor</h2>
+          <p>I'm RK, a video editor cutting trailers, brand films, TVCs and reels.</p>
+          <p>I lead post production at Unico Creative Studios, working with 14 editors to get each cut from first assembly to final delivery.</p>
+          <p class="about2-sign">Rhythm first. The rest follows.</p>
+        </div>
+        <div class="about2-side">
+          <div>
+            <h3 class="mono about2-label">Cut for</h3>
+            <p class="about2-clients"><span>Godrej</span> · <span>Decathlon</span> · <span>White Gold</span> · <span>Aashirvaad</span> · <span>Central Tiffin Room</span> · <span>Go Colors</span> · <span>Vijayanand Travels</span> · <span>Crash.club</span> <span class="more">and others</span></p>
+          </div>
+          <!-- numbers: years and videos are set here; reel views are added up from content.js by main.js -->
+          <div class="about2-nums" id="proof"></div>
+          <dl class="about2-facts"><dt class="mono">Tools</dt><dd><ul id="tools-list" class="credits-tools"></ul></dd></dl>
         </div>
       </div>
-      <!-- the final card: real numbers from the work above (filled in by main.js) -->
-      <div class="proof reveal" id="proof"></div>
+      <div class="about2-photo">
+        <img src="assets/portrait-profile.jpg" alt="RK, Pavan Ratnakar Kodikar, in profile" width="1040" height="1300" loading="lazy">
+        <span class="about2-ht" aria-hidden="true"></span>
+        <span class="about2-grid" aria-hidden="true"></span>
+        <span class="about2-rk" aria-hidden="true">RK</span>
+        <span class="mono about2-loc">Bengaluru, IN</span>
+      </div>
     </section>
 
     <!-- CONTACT: ink poster -->
@@ -181,7 +182,7 @@
 
   <script src="content.js?v=29"></script>
   <script src="assets/vendor/lenis.min.js"></script>
-  <script src="main.js?v=100"></script>
+  <script src="main.js?v=101"></script>
   <script src="interact.js?v=13"></script>
 </body>
 </html>

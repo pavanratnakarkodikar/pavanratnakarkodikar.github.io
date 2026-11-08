@@ -55,14 +55,15 @@
   $("#tools-list").innerHTML = data.tools.map((t) =>
     `<li><a href="${t.url}" target="_blank" rel="noopener">${esc(t.name)}</a></li>`).join("");
 
-  // About: the closing proof card, counted from the work lists so it stays true as work is added
+  // About numbers: years and videos are RK's own figures; reel views are added up from the reels list,
+  // rounded down and marked "+" (some reels have no count yet), so the total stays honest as reels are added
   const views = (v) => parseFloat(v) * (/M/i.test(v) ? 1e6 : /K/i.test(v) ? 1e3 : 1);
-  const topReel = data.reels.filter((r) => r.views).sort((a, b) => views(b.views) - views(a.views))[0];
+  const reelViews = data.reels.reduce((s, r) => s + (r.views ? views(r.views) : 0), 0);
+  const short = (n) => n >= 1e6 ? Math.floor(n / 1e5) / 10 + "M" : Math.floor(n / 1e3) + "K";
   $("#proof").innerHTML = [
-    [topReel ? topReel.views : "", "views on the top reel"],
-    [data.reels.filter((r) => r.views && views(r.views) >= 1e6).length, "reels past a million views"],
-    [data.youtube.length, "films edited"],
-    [3, "languages"],
+    ["4+", "years editing"],
+    ["60+", "videos edited"],
+    [short(reelViews) + "+", "views on reels"],
   ].map(([n, l]) => `<div><b>${n}</b><span class="mono">${l}</span></div>`).join("");
 
 
@@ -265,7 +266,7 @@
   }
 
   // Reveal on scroll: titles and blocks glide up as they enter; rows in a list follow each other a beat apart
-  document.querySelectorAll(".sec-title, .label-row, .about-copy, .contact-title, .contact-mail, .contact-grid")
+  document.querySelectorAll(".sec-title, .label-row, .about2-story, .about2-side, .contact-title, .contact-mail, .contact-grid")
     .forEach((el) => el.classList.add("reveal"));
   document.querySelectorAll("#idx > li").forEach((el, i) => { el.classList.add("reveal"); el.style.setProperty("--d", (i % 6) * 0.03 + "s"); });
   const io = new IntersectionObserver((entries) => entries.forEach((en) => {

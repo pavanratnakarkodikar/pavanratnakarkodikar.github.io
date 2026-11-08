@@ -922,3 +922,40 @@ a, button { -webkit-tap-highlight-color: transparent; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 button { -webkit-appearance: none; appearance: none; }
 a[href^="tel"], a[x-apple-data-detectors] { color: inherit !important; text-decoration: none !important; }
+
+/* ── About: THE EDITOR. A red block (story · clients · numbers · tools) over a full-bleed portrait in the
+   site's camera look (halftone + red viewfinder grid), with a giant RK running off its bottom-right edge. */
+.about2 { margin-top: calc(var(--edge) + 24px); }
+.about2-top.red-field { margin-bottom: 0; display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); }
+.about2-top.red-field::after { display: none; }
+.about2-title { margin: 0 0 clamp(20px, 2.4vw, 34px); }
+.about2-story p { font-size: clamp(19px, 1.9vw, 27px); line-height: 1.12; letter-spacing: -.045em; margin: 0 0 16px; max-width: 30ch; }
+.about2-sign { margin-top: clamp(24px, 2.6vw, 34px) !important; padding-top: 14px; border-top: 2px solid var(--white); width: max-content; max-width: 100% !important; color: var(--white); font-size: clamp(17px, 1.6vw, 24px) !important; }
+.about2-side { display: grid; align-content: start; gap: clamp(28px, 3.4vw, 48px); }
+.about2-label { margin: 0 0 10px; padding-bottom: 8px; border-bottom: 1.5px solid #0c0c0c; font-size: 11px; }
+.about2-clients { margin: 0; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.5; letter-spacing: -.02em; }
+.about2-clients span { white-space: nowrap; }
+.about2-clients .more { opacity: .6; }
+.about2-nums { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.about2-nums b { display: block; font-family: var(--display); font-weight: 700; font-synthesis: none; line-height: .85; font-size: clamp(48px, 6vw, 84px); }
+.about2-nums span { display: block; margin-top: 8px; font-size: 11px; }
+.about2-facts { display: grid; grid-template-columns: 6rem 1fr; margin: 0; align-items: baseline; }
+.about2-facts dt { font-size: 11px; }
+.about2-facts dd { margin: 0; font-size: 16px; letter-spacing: -.02em; white-space: nowrap; }
+.about2-photo { position: relative; margin: 0 var(--bleed); height: clamp(380px, 52vw, 760px); overflow: hidden; isolation: isolate; background: #111; }
+.about2-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 28%; filter: grayscale(1) contrast(1.2); z-index: 0; }
+.about2-ht { position: absolute; inset: 0; z-index: 1; mix-blend-mode: multiply; opacity: .32; background: radial-gradient(circle, rgba(0,0,0,.6) 0 1px, transparent 1.5px) 0 0 / 4px 4px; }
+.about2-grid { position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: .9;
+  background: linear-gradient(90deg, transparent calc(33.33% - 1px), var(--red) calc(33.33% - 1px) 33.33%, transparent 33.33% calc(66.66% - 1px), var(--red) calc(66.66% - 1px) 66.66%, transparent 66.66%),
+              linear-gradient(transparent calc(50% - 1px), var(--red) calc(50% - 1px) 50%, transparent 50%); }
+.about2-rk { position: absolute; right: -.02em; bottom: -.2em; z-index: 3; font-family: var(--display); font-weight: 700; font-synthesis: none; line-height: .78; color: var(--red); font-size: clamp(420px, 70vw, 1000px); }
+.about2-loc { position: absolute; left: calc(var(--rail) + var(--gutter)); bottom: 14px; z-index: 4; color: var(--white); mix-blend-mode: difference; }
+@media (max-width: 760px) {
+  .about2-top.red-field { grid-template-columns: 1fr; }
+  .about2-facts dd { white-space: normal; }
+  /* phones: a smaller RK tucked into the bottom-right corner (over the shoulder, clear of the face),
+     and the location label moved to the top-left */
+  .about2-photo { height: 440px; }
+  .about2-rk { font-size: 64vw; right: -.03em; bottom: -.22em; }
+  .about2-loc { top: 12px; bottom: auto; }
+}
