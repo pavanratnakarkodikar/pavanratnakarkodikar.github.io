@@ -968,3 +968,9 @@ a[href^="tel"], a[x-apple-data-detectors] { color: inherit !important; text-deco
 .about2-top.red-field { margin-top: 0; }
 .about2-top.red-field::before { display: none; }
 .about2-top.red-field::after { display: block; }
+
+/* ?og: the intro poster alone, filling a 1200x630 frame and holding still (used to render the share image) */
+.og-shot .top, .og-shot .hud, .og-shot .progress, .og-shot .cursor, .og-shot .ht-edge, .og-shot main > :not(.hero), .og-shot .hero > :not(.hero-d) { display: none !important; }
+.og-shot body, .og-shot .hero, .og-shot .hero-d { margin: 0 !important; padding: 0 !important; }
+.og-shot .pd-board { width: 100vw !important; height: 100vh !important; aspect-ratio: auto !important; }
+.og-shot *, .og-shot *::before, .og-shot *::after { animation: none !important; transition: none !important; }
