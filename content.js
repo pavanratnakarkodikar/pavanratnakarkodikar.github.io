@@ -24,7 +24,7 @@ window.PORTFOLIO = {
     { id: "dWlFInODuJA", title: "Firefly Theme Lyrical", type: "Lyrical video", client: "Anand Audio" },
     { id: "CS9MJSOZXL8", title: "Gold of Karnataka Ep. 1 ft. Anke Gowda", type: "Series", client: "White Gold CSR" },
     { id: "7SvRv_55cA0", title: "The Joy of Fatherhood", type: "Series", client: "White Gold CSR" },
-    { id: "UOndBAOxrqE", title: "Don't Hold Your Dreams Back", type: "TVC", client: "White Gold" },
+    { id: "UOndBAOxrqE", title: "Don't Hold Your Dreams Back", type: "TVC", client: "White Gold Money" },
     { id: "IX94m5XhA3w", title: "Two Sisters, One Trust", type: "TVC", client: "White Gold Money" },
     { id: "hUTH6EnWEFk", title: "A Wife's Support", type: "TVC", client: "White Gold Money" },
     { id: "sSLqAVcemWY", title: "Back to Glory", type: "TVC", client: "White Gold Money" },
