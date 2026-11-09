@@ -40,18 +40,24 @@
        Kaneda Gothic Bold (display), Helvetica Neue Bold (text), IBM Plex Mono Regular (labels) -->
   <link rel="preconnect" href="https://use.typekit.net" crossorigin>
   <link rel="stylesheet" href="https://use.typekit.net/ran2ila.css">
-  <link rel="stylesheet" href="style.css?v=123">
+  <link rel="stylesheet" href="style.css?v=124">
 </head>
 <body>
 
   <!-- pre-roll sting: a red light streak hits the bolt, RGB split, lock. Once per visit. -->
+  <!-- first-visit sting: viewfinder snaps in, the bolt glitches in (RGB split) and locks red while a timecode
+       rolls one second at 24 fps, then the black splits open like a camera gate -->
   <div class="preroll" id="preroll" aria-hidden="true">
-    <span class="pr-streak"></span>
-    <svg class="pr-bolt" viewBox="-40 -20 616 935">
-      <path class="pr-r" d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/>
-      <path class="pr-f" d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/>
-      <path class="pr-w" d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/>
-    </svg>
+    <span class="pr-half pr-half--top"></span><span class="pr-half pr-half--bottom"></span>
+    <div class="pr-center">
+      <span class="pr-gate"></span>
+      <svg class="pr-bolt" viewBox="-40 -20 616 935">
+        <path class="pr-r" d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/>
+        <path class="pr-f" d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/>
+        <path class="pr-w" d="M536 0 L374 251.5 L506 251.5 L276.5 522.8 L433.5 522.8 L0 895 L162 643.5 L30 643.5 L259.5 372.2 L102.5 372.2 Z"/>
+      </svg>
+      <span class="mono pr-tc" id="pr-tc">00:00:00:00</span>
+    </div>
   </div>
 
   <!-- top bar -->
@@ -190,7 +196,7 @@
 
   <script src="content.js?v=29"></script>
   <script src="assets/vendor/lenis.min.js"></script>
-  <script src="main.js?v=103"></script>
+  <script src="main.js?v=104"></script>
   <script src="interact.js?v=13"></script>
 </body>
 </html>

@@ -993,3 +993,33 @@ a[href^="tel"], a[x-apple-data-detectors] { color: inherit !important; text-deco
   .reel-count { display: flex; justify-content: space-between; margin-top: 14px; font-size: 11px; color: var(--ink); opacity: .7; }
 }
 @media (min-width: 761px) { .reel-count { display: none; } }
+
+/* ── first-visit sting, v2: smaller bolt inside a viewfinder, timecode, camera-gate exit ───────────── */
+.preroll { background: none; animation: pr-out .01s linear 1.75s forwards; }
+.pr-half { position: absolute; left: 0; right: 0; height: 50.5%; background: #0c0c0c; animation: .5s cubic-bezier(.7, 0, .2, 1) 1.15s forwards; }
+.pr-half--top { top: 0; animation-name: pr-gate-up; }
+.pr-half--bottom { bottom: 0; animation-name: pr-gate-down; }
+@keyframes pr-gate-up { to { transform: translateY(-100%); } }
+@keyframes pr-gate-down { to { transform: translateY(100%); } }
+.pr-center { position: relative; display: grid; justify-items: center; gap: 18px; animation: pr-center-out .2s ease-in 1.05s forwards; }
+@keyframes pr-center-out { to { opacity: 0; transform: scale(.96); } }
+.pr-bolt { height: min(14vh, 112px); }
+/* viewfinder: four thin red corner brackets that snap in around the bolt */
+.pr-gate { position: absolute; left: 50%; top: calc(min(14vh, 112px) / 2); width: min(26vh, 200px); aspect-ratio: 1; translate: -50% -50%; opacity: 0;
+  --c: #d90000; --l: 22px; --t: 1.5px;
+  background:
+    linear-gradient(var(--c) 0 0) 0 0 / var(--l) var(--t), linear-gradient(var(--c) 0 0) 0 0 / var(--t) var(--l),
+    linear-gradient(var(--c) 0 0) 100% 0 / var(--l) var(--t), linear-gradient(var(--c) 0 0) 100% 0 / var(--t) var(--l),
+    linear-gradient(var(--c) 0 0) 0 100% / var(--l) var(--t), linear-gradient(var(--c) 0 0) 0 100% / var(--t) var(--l),
+    linear-gradient(var(--c) 0 0) 100% 100% / var(--l) var(--t), linear-gradient(var(--c) 0 0) 100% 100% / var(--t) var(--l);
+  background-repeat: no-repeat; animation: pr-gate-in .28s cubic-bezier(.2, .9, .2, 1) .05s forwards; }
+@keyframes pr-gate-in { from { opacity: 0; scale: 1.35; } to { opacity: 1; scale: 1; } }
+/* bolt: a few jittering RGB-split frames, then locks red */
+.pr-bolt .pr-r { animation: pr-r2 .8s steps(1) .3s forwards; }
+.pr-bolt .pr-f { animation: pr-f2 .8s steps(1) .3s forwards; }
+.pr-bolt .pr-w { animation: pr-w2 .8s steps(1) .3s forwards; }
+@keyframes pr-r2 { 0% { opacity: 1; transform: translate(-14px, 5px); } 12% { transform: translate(8px, -3px); } 24% { transform: translate(-5px, 2px); } 36%, 100% { opacity: 1; transform: none; } }
+@keyframes pr-f2 { 0% { opacity: .85; transform: translate(14px, -5px); } 12% { transform: translate(-8px, 3px); } 24% { transform: translate(5px, -2px); } 36%, 100% { opacity: 0; } }
+@keyframes pr-w2 { 0% { opacity: .9; } 12% { opacity: 0; } 18% { opacity: .6; } 24%, 100% { opacity: 0; } }
+.pr-tc { color: var(--white); font-size: 11px; letter-spacing: .12em; opacity: .75; font-variant-numeric: tabular-nums; }
+.pr-tc b { color: #d90000; font-weight: 400; }

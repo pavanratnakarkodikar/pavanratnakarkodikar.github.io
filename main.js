@@ -1,3 +1,16 @@
+// First-visit sting: the timecode rolls one second at 24 fps, 00:00:00:00 -> 00:00:00:24
+(() => {
+  const tc = document.getElementById("pr-tc");
+  if (!tc || document.documentElement.classList.contains("no-preroll") || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const start = performance.now() + 150;
+  const tick = (now) => {
+    const f = Math.max(0, Math.min(24, Math.floor((now - start) / (1000 / 24) * 1.15)));
+    tc.innerHTML = `00:00:00:<b>${String(f).padStart(2, "0")}</b>`;
+    if (f < 24) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+})();
+
 (() => {
   const data = window.PORTFOLIO;
   const $ = (s) => document.querySelector(s);
