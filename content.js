@@ -22,7 +22,7 @@ window.PORTFOLIO = {
       type: "Series", client: "White Gold CSR", featured: true },
     { id: "w7jDm6ndg0E", title: "Firefly Journey", type: "Promo", client: "Anand Audio" },
     { id: "dWlFInODuJA", title: "Firefly Theme Lyrical", type: "Lyrical video", client: "Anand Audio" },
-    { id: "CS9MJSOZXL8", title: "Gold of Karnataka Ep. 1", subtitle: "ft. Anke Gowda", type: "Series", client: "White Gold CSR" },
+    { id: "CS9MJSOZXL8", title: "Gold of Karnataka Ep. 1 ft. Anke Gowda", type: "Series", client: "White Gold CSR" },
     { id: "7SvRv_55cA0", title: "The Joy of Fatherhood", type: "Series", client: "White Gold CSR" },
     { id: "UOndBAOxrqE", title: "Don't Hold Your Dreams Back", type: "TVC", client: "White Gold" },
     { id: "IX94m5XhA3w", title: "Two Sisters, One Trust", type: "TVC", client: "White Gold Money" },
