@@ -959,7 +959,7 @@ a[href^="tel"], a[x-apple-data-detectors] { color: inherit !important; text-deco
   .about2-photo img { object-position: 42% 12%; }
   /* RK spans the full width along the bottom and runs off the edge (like KODIKAR in the intro):
      the face stays in the top half, the letters rise over the chest */
-  .about2-rk { left: 0; right: 0; text-align: center; font-size: 150vw; bottom: -.24em; letter-spacing: -.01em; }
+  .about2-rk { left: 0; right: 0; text-align: center; font-size: min(150vw, 590px); bottom: -.24em; letter-spacing: -.01em; } /* capped at its iPhone size so wider phones / narrow windows keep the face clear */
   .about2-loc { top: 12px; bottom: auto; }
 }
 
@@ -1030,4 +1030,11 @@ a[href^="tel"], a[x-apple-data-detectors] { color: inherit !important; text-deco
   .about2-top.red-field { align-items: stretch; }
   .about2-side { align-content: space-between; }
   .about2-nums b { font-size: clamp(64px, 8vw, 128px); }
+}
+/* tablets and small laptops (761-1100px): the red block stacks into one column, as on phones, so the client
+   list, numbers and tools never get cut off at the edge */
+@media (min-width: 761px) and (max-width: 1100px) {
+  .about2-top.red-field { grid-template-columns: 1fr; }
+  .about2-side { align-content: start; }
+  .about2-facts dd { white-space: normal; }
 }
