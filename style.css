@@ -1038,3 +1038,16 @@ a[href^="tel"], a[x-apple-data-detectors] { color: inherit !important; text-deco
   .about2-side { align-content: start; }
   .about2-facts dd { white-space: normal; }
 }
+
+/* ── Cut-style headings: section titles land with a two-frame RGB-split jolt, once ─────────────── */
+.sec-title.in, .contact-title.in { animation: cut-in .5s steps(1) both; }
+.sec-title, .contact-title { --split-a: var(--red); --split-b: #ff2d2d; }
+.red-field .sec-title { --split-a: #f9f9f9; --split-b: #0c0c0c; }
+.ink-field .contact-title { --split-a: #f9f9f9; --split-b: #ff2d2d; }
+@keyframes cut-in {
+  0%   { transform: translateX(-10px); text-shadow: 8px 0 var(--split-a), -8px 0 var(--split-b); }
+  18%  { transform: translateX(7px);   text-shadow: -6px 0 var(--split-a), 6px 0 var(--split-b); }
+  36%  { transform: translateX(-3px);  text-shadow: 3px 0 var(--split-a), -3px 0 var(--split-b); }
+  54%, 100% { transform: none; text-shadow: none; }
+}
+@media (prefers-reduced-motion: reduce) { .sec-title.in, .contact-title.in { animation: none; } }

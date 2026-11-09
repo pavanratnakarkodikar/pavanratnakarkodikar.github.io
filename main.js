@@ -91,6 +91,26 @@
     ["90+", "videos edited"],
     [short(reelViews) + "+", "views on reels"],
   ].map(([n, l]) => `<div><b>${n}</b><span class="mono">${l}</span></div>`).join("");
+  // the numbers roll up from zero, like a timecode, the first time About comes into view
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const nums = [...document.querySelectorAll("#proof b")].map((b) => {
+      const [, num, suffix] = b.textContent.match(/^([\d.]+)(.*)$/) || [];
+      return { b, num: +num, suffix, dec: (num.split(".")[1] || "").length };
+    });
+    nums.forEach((n) => (n.b.textContent = (0).toFixed(n.dec) + n.suffix));
+    const roll = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      roll.disconnect();
+      const t0 = performance.now(), dur = 1100;
+      const step = (now) => {
+        const p = Math.min(1, (now - t0) / dur), k = 1 - Math.pow(1 - p, 3);
+        nums.forEach((n) => (n.b.textContent = (n.num * k).toFixed(n.dec) + n.suffix));
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }, { threshold: 0.6 });
+    roll.observe($("#proof"));
+  }
 
 
   // Fit giant words (hero option B) to their container width
