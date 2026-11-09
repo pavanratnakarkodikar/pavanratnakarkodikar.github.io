@@ -974,3 +974,22 @@ a[href^="tel"], a[x-apple-data-detectors] { color: inherit !important; text-deco
 .og-shot body, .og-shot .hero, .og-shot .hero-d { margin: 0 !important; padding: 0 !important; }
 .og-shot .pd-board { width: 100vw !important; height: 100vh !important; aspect-ratio: auto !important; }
 .og-shot *, .og-shot *::before, .og-shot *::after { animation: none !important; transition: none !important; }
+
+/* ── Phone pass ─────────────────────────────────────────────────────────────── */
+@media (max-width: 760px) {
+  /* Reels: same proportions as the laptop (heading close to its posters, rows close together) */
+  .reels-head { margin-bottom: 20px; }
+  .reels-label { margin-bottom: 12px; }
+  .reel-grid--top { margin-bottom: 0; }
+  #reels-top + .reel-count { margin-bottom: 36px; }
+  /* one rhythm: 96px between sections on the plain background; after a halftone edge, the edge plus the same breathing room */
+  .reels { padding-top: 0; }
+  /* tap areas ~44px on small controls; the visible design doesn't change */
+  .top-nav a, .top .mark, .theme-toggle, .pill, .to-top, .credits-tools a { position: relative; }
+  .top-nav a::before, .top .mark::before, .to-top::before, .credits-tools a::before { content: ""; position: absolute; inset: -14px -6px; }
+  .theme-toggle::before { content: ""; position: absolute; inset: -9px; }
+  .pill::before { content: ""; position: absolute; inset: -8px -4px; }
+  /* swipe hint under each reels row: "1 / 4 ->" (main.js keeps the count in step with the swipe) */
+  .reel-count { display: flex; justify-content: space-between; margin-top: 14px; font-size: 11px; color: var(--ink); opacity: .7; }
+}
+@media (min-width: 761px) { .reel-count { display: none; } }

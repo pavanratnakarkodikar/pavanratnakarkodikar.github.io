@@ -51,6 +51,19 @@
     </a>`;
   $("#reels-top").innerHTML = data.reels.filter((r) => r.top).map(reelCard).join("");
   $("#reels").innerHTML = data.reels.filter((r) => !r.top).map(reelCard).join("");
+  // phones: the reels rows scroll sideways, so each gets a "1 / 4 ->" counter that follows the swipe
+  document.querySelectorAll(".reel-grid").forEach((grid) => {
+    const total = grid.children.length, count = document.createElement("p");
+    count.className = "mono reel-count";
+    const update = () => {
+      const card = grid.children[0]; if (!card) return;
+      const step = card.getBoundingClientRect().width + parseFloat(getComputedStyle(grid).columnGap || 0);
+      const i = Math.min(total, Math.round(grid.scrollLeft / step) + 1);
+      count.innerHTML = `<span>${i} / ${total}</span><span>${i < total ? "Swipe →\ufe0e" : "← Back"}</span>`;
+    };
+    grid.addEventListener("scroll", update, { passive: true });
+    grid.after(count); update();
+  });
 
   $("#tools-list").innerHTML = data.tools.map((t) =>
     `<li><a href="${t.url}" target="_blank" rel="noopener">${esc(t.name)}</a></li>`).join("");
