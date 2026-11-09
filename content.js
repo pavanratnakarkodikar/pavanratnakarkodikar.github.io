@@ -12,7 +12,7 @@ window.PORTFOLIO = {
   youtube: [
     { id: "mrFhygFY0ug", title: "Kashi", subtitle: "The City of Light",
       type: "Documentary trailer", client: "Ullas Agarbathi", featured: true },
-    { id: "da3DOjYqVgs", title: "30 Minutes Strategy", subtitle: "ft. Sunil Chhetri",
+    { id: "da3DOjYqVgs", title: "30 Minutes Strategy", subtitle: "ft. Sunil Chhetri, Gurpreet Singh Sandhu & Ryan Williams",
       type: "Brand film", client: "White Gold × Bengaluru FC", featured: true },
     { id: "PzUnxnk6Dio", title: "With You in Every Dream", subtitle: "Oppamundu Oro Swapnathilum",
       type: "Brand film", client: "White Gold × Kerala Blasters FC", featured: true },
