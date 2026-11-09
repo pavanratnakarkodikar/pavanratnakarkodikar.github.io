@@ -17,7 +17,7 @@ window.PORTFOLIO = {
     { id: "PzUnxnk6Dio", title: "With You in Every Dream", subtitle: "Oppamundu Oro Swapnathilum",
       type: "Brand film", client: "White Gold × Kerala Blasters FC", featured: true },
     { id: "ieNHyExbpOo", title: "Best Exercise to Release Pledged Gold",
-      type: "TVC", client: "White Gold", featured: true },
+      type: "TVC", client: "White Gold Money", featured: true },
     { id: "LYQg1dbE0rc", title: "Path to Glory", subtitle: "Ajna Amit, India's youngest MMA champion",
       type: "Series", client: "White Gold CSR", featured: true },
     { id: "w7jDm6ndg0E", title: "Firefly Journey", type: "Promo", client: "Anand Audio" },
