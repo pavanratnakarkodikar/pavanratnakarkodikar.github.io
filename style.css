@@ -1023,3 +1023,11 @@ a[href^="tel"], a[x-apple-data-detectors] { color: inherit !important; text-deco
 @keyframes pr-w2 { 0% { opacity: .9; } 12% { opacity: 0; } 18% { opacity: .6; } 24%, 100% { opacity: 0; } }
 .pr-tc { color: var(--white); font-size: 11px; letter-spacing: .12em; opacity: .75; font-variant-numeric: tabular-nums; }
 .pr-tc b { color: #d90000; font-weight: 400; }
+
+/* About on laptops: the right column spans the full height of the story, Cut for level with THE EDITOR,
+   the numbers in the middle (larger), Tools level with the rhythm line, so no empty block bottom-right */
+@media (min-width: 761px) {
+  .about2-top.red-field { align-items: stretch; }
+  .about2-side { align-content: space-between; }
+  .about2-nums b { font-size: clamp(64px, 8vw, 128px); }
+}
