@@ -263,6 +263,21 @@
     };
     pdFrame.addEventListener("pointerup", release);
     pdFrame.addEventListener("pointercancel", () => { pdFrame.classList.remove("is-dragging"); animateTo(t0); });
+    // Peek on hover (mouse only): resting on the photo eases the O open a touch with the same spring,
+    // a hint that it moves; leaving lets it settle shut. Click or drag still opens it fully.
+    if (!still && matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      let peeking = false;
+      pdFrame.addEventListener("pointerenter", (e) => {
+        if (e.pointerType !== "mouse" || (pdFrame._t || 0) > 0.05) return;
+        peeking = true; pdFrame.style.animation = "none"; swapIn(); animateTo(0.15);
+      });
+      pdFrame.addEventListener("pointerleave", (e) => {
+        if (!peeking || pdFrame.hasPointerCapture(e.pointerId)) return;
+        peeking = false;
+        if ((pdFrame._t || 0) < 0.5) animateTo(0);
+      });
+      pdFrame.addEventListener("pointerdown", () => { peeking = false; });
+    }
   }
 
   // Contact: LET'S TALK fitted to the width, then stretched tall like the phone intro
@@ -385,5 +400,29 @@
     const next = root.dataset.theme === "dark" ? "light" : "dark";
     apply(next);
     try { localStorage.setItem("rk-theme", next); } catch (e) {}
+  });
+})();
+
+// Easter egg: type "rk" anywhere to replay the loading sting
+(() => {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  let buf = "";
+  addEventListener("keydown", (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey || (e.target.closest && e.target.closest("input, textarea, [contenteditable]"))) return;
+    buf = (buf + (e.key || "").toLowerCase()).slice(-2);
+    if (buf !== "rk") return;
+    buf = "";
+    const old = document.getElementById("preroll");
+    if (!old) return;
+    const fresh = old.cloneNode(true);
+    old.replaceWith(fresh);
+    document.documentElement.classList.remove("no-preroll");
+    const tc = fresh.querySelector("#pr-tc"), start = performance.now() + 150;
+    const tick = (now) => {
+      const f = Math.max(0, Math.min(24, Math.floor((now - start) / (1000 / 24) * 1.15)));
+      tc.innerHTML = `00:00:00:<b>${String(f).padStart(2, "0")}</b>`;
+      if (f < 24) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
   });
 })();
